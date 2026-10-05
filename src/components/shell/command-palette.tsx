@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { search } from "@/lib/search";
 import { useSearchDocs } from "@/lib/use-search";
@@ -13,7 +13,9 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
   const { docs, loading, error } = useSearchDocs();
   const router = useRouter();
   const input = useRef<HTMLInputElement>(null);
-  const hits = useMemo(() => search(docs, q, 12), [docs, q]);
+  // typing stays responsive; results catch up a frame later
+  const deferredQ = useDeferredValue(q);
+  const hits = useMemo(() => search(docs, deferredQ, 12), [docs, deferredQ]);
 
   useEffect(() => input.current?.focus(), []);
 
@@ -23,11 +25,12 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-start justify-center px-4 pt-[12vh]" role="dialog" aria-modal="true" aria-label="Search">
-      <button className="absolute inset-0 bg-black/35" aria-label="Close search" onClick={onClose} />
-      <div className="anim-in relative w-full max-w-xl overflow-hidden rounded-lg border border-border-strong bg-surface shadow-2xl">
-        <div className="flex items-center gap-2 border-b border-border px-4">
-          <Search className="h-4 w-4 text-subtle" aria-hidden />
+    <div className="fixed inset-0 z-50 flex items-start justify-center px-3 pt-16 sm:px-4 sm:pt-[12vh]" role="dialog" aria-modal="true" aria-label="Search">
+      {/* transparent click-catcher (no dimming layer) */}
+      <button className="absolute inset-0 cursor-default" aria-label="Close search" tabIndex={-1} onClick={onClose} />
+      <div className="anim-in relative w-full max-w-xl overflow-hidden rounded-xl border border-border-strong bg-surface shadow-[0_12px_40px_-8px_rgba(0,0,0,0.25)]">
+        <div className="flex items-center gap-2.5 border-b border-border px-4 focus-within:border-accent">
+          <Search className="h-4 w-4 shrink-0 text-subtle" aria-hidden />
           <input
             ref={input}
             value={q}
@@ -45,7 +48,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
               }
             }}
             placeholder="Search lessons, questions, glossary, code, notes…"
-            className="h-12 w-full bg-transparent text-base text-fg outline-none placeholder:text-subtle"
+            className="h-12 w-full bg-transparent text-base text-fg placeholder:text-subtle focus:outline-none focus-visible:outline-none"
             role="combobox"
             aria-expanded={hits.length > 0}
             aria-controls="palette-results"
@@ -65,7 +68,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
                 onClick={() => go(h.doc.href)}
                 className={`flex w-full items-baseline gap-3 rounded-md px-3 py-2 text-left ${i === active ? "bg-surface-3" : ""}`}
               >
-                <span className="w-20 shrink-0 text-xs uppercase tracking-wide text-subtle">{KIND_LABEL[h.doc.kind]}</span>
+                <span className="w-16 shrink-0 pt-0.5 text-[11px] uppercase tracking-wide text-subtle sm:w-20">{KIND_LABEL[h.doc.kind]}</span>
                 <span className="min-w-0">
                   <span className="block truncate text-sm font-medium text-fg">{h.doc.title}</span>
                   {h.doc.subtitle && <span className="block truncate text-xs text-muted">{h.doc.subtitle}</span>}

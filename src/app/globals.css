@@ -100,10 +100,13 @@ body {
 ::selection {
   background: var(--accent-soft);
 }
-:focus-visible {
-  outline: 2px solid var(--focus);
-  outline-offset: 2px;
-  border-radius: 4px;
+/* in the base layer so components can override it with utilities (e.g. the search field) */
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
 }
 a {
   text-underline-offset: 3px;

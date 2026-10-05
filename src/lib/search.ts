@@ -31,6 +31,31 @@ export interface SearchHit { doc: SearchDoc; score: number }
 
 const KIND_BOOST: Partial<Record<SearchKind, number>> = { lesson: 1.3, track: 1.4, question: 1.2, design: 1.2, note: 1.1 };
 
+/** A document tokenized once; body words are de-duplicated with their counts. */
+interface Prepared {
+  doc: SearchDoc;
+  titleLower: string;
+  title: string[];
+  tags: string[];
+  body: [word: string, count: number][];
+}
+
+// Tokenizing ~2k documents on every keystroke made typing lag, so each docs array
+// is prepared once and cached by identity.
+const prepared = new WeakMap<SearchDoc[], Prepared[]>();
+function prepare(docs: SearchDoc[]): Prepared[] {
+  let p = prepared.get(docs);
+  if (!p) {
+    p = docs.map((doc) => {
+      const counts = new Map<string, number>();
+      for (const w of tokenize(doc.text)) counts.set(w, (counts.get(w) ?? 0) + 1);
+      return { doc, titleLower: doc.title.toLowerCase(), title: tokenize(doc.title), tags: (doc.tags ?? []).flatMap(tokenize), body: [...counts] };
+    });
+    prepared.set(docs, p);
+  }
+  return p;
+}
+
 /**
  * Every query token must match (as a prefix of a word) somewhere in the doc.
  * Title matches weigh most, then tags, then body; exact-phrase title matches get a bonus.
@@ -40,18 +65,15 @@ export function search(docs: SearchDoc[], query: string, limit = 50, kinds?: Sea
   if (!q.length) return [];
   const phrase = query.trim().toLowerCase();
   const hits: SearchHit[] = [];
-  for (const doc of docs) {
-    if (kinds && kinds.length && !kinds.includes(doc.kind)) continue;
-    const title = tokenize(doc.title);
-    const tags = (doc.tags ?? []).flatMap(tokenize);
-    const body = tokenize(doc.text);
+  for (const p of prepare(docs)) {
+    if (kinds && kinds.length && !kinds.includes(p.doc.kind)) continue;
     let score = 0;
     let all = true;
     for (const t of q) {
-      const inTitle = title.some((w) => w.startsWith(t)) ? (title.includes(t) ? 10 : 6) : 0;
-      const inTags = tags.some((w) => w.startsWith(t)) ? 4 : 0;
+      const inTitle = p.title.some((w) => w.startsWith(t)) ? (p.title.includes(t) ? 10 : 6) : 0;
+      const inTags = p.tags.some((w) => w.startsWith(t)) ? 4 : 0;
       let inBody = 0;
-      for (const w of body) if (w.startsWith(t)) inBody += w === t ? 1 : 0.5;
+      for (const [w, c] of p.body) if (w.startsWith(t)) inBody += w === t ? c : c * 0.5;
       const s = inTitle + inTags + Math.min(inBody, 6);
       if (s === 0) {
         all = false;
@@ -60,9 +82,9 @@ export function search(docs: SearchDoc[], query: string, limit = 50, kinds?: Sea
       score += s;
     }
     if (!all) continue;
-    if (doc.title.toLowerCase().includes(phrase)) score += 8;
-    score *= KIND_BOOST[doc.kind] ?? 1;
-    hits.push({ doc, score });
+    if (p.titleLower.includes(phrase)) score += 8;
+    score *= KIND_BOOST[p.doc.kind] ?? 1;
+    hits.push({ doc: p.doc, score });
   }
   return hits.sort((a, b) => b.score - a.score).slice(0, limit);
 }

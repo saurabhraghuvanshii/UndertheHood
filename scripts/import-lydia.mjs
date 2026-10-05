@@ -20,7 +20,7 @@ const SOURCE = {
   label: "lydiahallie/javascript-questions (MIT)",
   url: "https://github.com/lydiahallie/javascript-questions",
   kind: "external",
-  note: "Imported from the learner's copy in saurabhraghuvanshii/language-learning. © Lydia Hallie, MIT License.",
+  note: "Imported from © Lydia Hallie, MIT License",
 };
 
 function htmlToInline(s) {

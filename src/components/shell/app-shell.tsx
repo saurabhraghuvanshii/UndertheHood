@@ -11,6 +11,7 @@ import { cn } from "@/components/ui/cn";
 import { Kbd } from "@/components/ui";
 import { ThemeToggle } from "./theme";
 import { CommandPalette } from "./command-palette";
+import { loadIndex } from "@/lib/use-search";
 import { useLearner, useHydrated } from "@/lib/store";
 import { today } from "@/lib/dates";
 
@@ -76,6 +77,14 @@ export function AppShell({ children }: { children: ReactNode }) {
   const [drawer, setDrawer] = useState(false);
   const [palette, setPalette] = useState(false);
 
+  // warm the search index while the browser is idle so the first search is instant
+  useEffect(() => {
+    const w = window as Window & { requestIdleCallback?: (cb: () => void) => number };
+    const id = w.requestIdleCallback ? w.requestIdleCallback(() => void loadIndex().catch(() => {})) : window.setTimeout(() => void loadIndex().catch(() => {}), 2000);
+    return () => {
+      if (!w.requestIdleCallback) clearTimeout(id);
+    };
+  }, []);
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -139,6 +148,7 @@ export function AppShell({ children }: { children: ReactNode }) {
             aria-label="Search everything"
           >
             <Search className="h-4 w-4" aria-hidden />
+            <span className="sm:hidden">Search</span>
             <span className="hidden sm:inline">Search lessons, questions, notes…</span>
             <span className="ml-auto hidden items-center gap-1 sm:flex">
               <Kbd>Ctrl</Kbd>

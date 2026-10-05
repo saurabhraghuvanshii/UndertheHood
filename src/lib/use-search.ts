@@ -4,7 +4,8 @@ import type { SearchDoc } from "./search";
 import { useLearner } from "./store";
 
 let cache: Promise<SearchDoc[]> | null = null;
-function loadIndex() {
+/** Fetch (once) the content index. Also called when the browser is idle so search opens instantly. */
+export function loadIndex() {
   cache ??= fetch("/search-index.json").then((r) => {
     if (!r.ok) throw new Error(`search index: ${r.status}`);
     return r.json() as Promise<SearchDoc[]>;

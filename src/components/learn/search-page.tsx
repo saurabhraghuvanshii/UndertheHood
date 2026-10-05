@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useMemo, useState } from "react";
+import { useDeferredValue, useMemo, useState } from "react";
 import { excerpt, search, type SearchKind } from "@/lib/search";
 import { useSearchDocs } from "@/lib/use-search";
 import { KIND_LABEL } from "./search-results";
@@ -14,12 +13,11 @@ export function SearchPage({ initial }: { initial: string }) {
   const [q, setQ] = useState(initial);
   const [kinds, setKinds] = useState<SearchKind[]>([]);
   const { docs, loading, error } = useSearchDocs();
-  const router = useRouter();
-  const hits = useMemo(() => search(docs, q, 100, kinds), [docs, q, kinds]);
-  const counts = useMemo(() => {
-    const all = search(docs, q, 10000);
-    return Object.fromEntries(KINDS.map((k) => [k, all.filter((h) => h.doc.kind === k).length]));
-  }, [docs, q]);
+  const deferredQ = useDeferredValue(q);
+  // one search over everything; kind filters and counts are derived from it
+  const all = useMemo(() => search(docs, deferredQ, 100000), [docs, deferredQ]);
+  const counts = useMemo(() => Object.fromEntries(KINDS.map((k) => [k, all.filter((h) => h.doc.kind === k).length])), [all]);
+  const hits = useMemo(() => (kinds.length ? all.filter((h) => kinds.includes(h.doc.kind)) : all).slice(0, 100), [all, kinds]);
   return (
     <div>
       <input
@@ -27,11 +25,12 @@ export function SearchPage({ initial }: { initial: string }) {
         autoFocus
         onChange={(e) => {
           setQ(e.target.value);
-          router.replace(`/search?q=${encodeURIComponent(e.target.value)}`, { scroll: false });
+          // keep the URL shareable without triggering a server round-trip per keystroke
+          window.history.replaceState(null, "", `/search?q=${encodeURIComponent(e.target.value)}`);
         }}
         placeholder="Search lessons, questions, glossary terms, code, design exercises and your notes"
         aria-label="Search"
-        className="h-12 w-full rounded-lg border border-border-strong bg-surface px-4 text-base"
+        className="h-12 w-full rounded-lg border border-border-strong bg-surface px-4 text-base focus:border-accent focus:outline-none focus-visible:outline-none"
       />
       <div className="mt-3 flex flex-wrap gap-1.5" role="group" aria-label="Filter by type">
         {KINDS.map((k) => {
