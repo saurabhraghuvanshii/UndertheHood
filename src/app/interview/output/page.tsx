@@ -14,7 +14,7 @@ export default function OutputIndex() {
       <Breadcrumbs items={[{ href: "/interview", label: "Interview prep" }, { label: "Output prediction" }]} />
       <PageHeader
         title="What’s the output?"
-        description={<>{outputQuestions.length} JavaScript output-prediction questions, imported with their original numbering from the copy in your <a className="underline" href="https://github.com/saurabhraghuvanshii/language-learning/blob/main/JS/Js-questions-lydiahallie.md">language-learning</a> repo. Original work © Lydia Hallie, <a className="underline" href="https://github.com/lydiahallie/javascript-questions">MIT License</a>.</>}
+        description={<>{outputQuestions.length} JavaScript output-prediction questions, with their original numbering. Original work © Lydia Hallie, <a className="underline" href="https://github.com/lydiahallie/javascript-questions">MIT License</a>.</>}
       />
       <QuestionList
         showFrequency={false}

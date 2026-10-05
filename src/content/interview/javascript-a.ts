@@ -6,12 +6,6 @@ import type { InterviewQuestion } from "../types";
  * Only topics were supplied, so `question` is a natural interviewer phrasing of each topic.
  */
 
-const learnerList = {
-  label: "Learner-supplied JavaScript interview list (topics ranked by frequency)",
-  kind: "original-note",
-  note: "Only topic names were supplied; question wording and all explanations are original.",
-} as const;
-
 export const questions: InterviewQuestion[] = [
   // ───────────────────────────────────────────── 1. Event loop
   {
@@ -97,13 +91,7 @@ B`,
     ],
     relatedLessons: ["javascript/event-loop", "javascript/sync-vs-async", "javascript/promises", "javascript/timers", "javascript/call-stack", "nodejs/node-event-loop"],
     relatedQuestions: ["js-09", "js-14", "js-20", "js-07"],
-    sources: [
-      learnerList,
-      { label: "MDN — JavaScript execution model", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Execution_model", kind: "docs" },
-      { label: "MDN — Using microtasks (queueMicrotask guide)", url: "https://developer.mozilla.org/en-US/docs/Web/API/HTML_DOM_API/Microtask_guide", kind: "docs" },
-      { label: "HTML Standard — Event loops", url: "https://html.spec.whatwg.org/multipage/webappapis.html#event-loops", kind: "docs" },
-      { label: "Node.js — The event loop, timers and process.nextTick()", url: "https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 2. Closures
@@ -180,11 +168,7 @@ console.log(a.get(), b.get());`,
     ],
     relatedLessons: ["javascript/closures", "javascript/scope", "javascript/execution-context", "javascript/memory-leaks-gc"],
     relatedQuestions: ["js-26", "js-06", "js-21", "js-08"],
-    sources: [
-      learnerList,
-      { label: "MDN — Closures", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures", kind: "docs" },
-      { label: "ECMAScript — Environment Records", url: "https://tc39.es/ecma262/#sec-environment-records", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 3. this
@@ -269,11 +253,7 @@ Alan`,
     ],
     relatedLessons: ["javascript/this-binding", "javascript/call-apply-bind", "javascript/arrow-functions", "javascript/classes-inheritance"],
     relatedQuestions: ["js-29", "js-16", "js-23", "js-49"],
-    sources: [
-      learnerList,
-      { label: "MDN — this", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this", kind: "docs" },
-      { label: "MDN — Strict mode", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 4. Prototypal inheritance
@@ -360,12 +340,7 @@ Tom: meow true true`,
     ],
     relatedLessons: ["javascript/prototypes", "javascript/classes-inheritance", "javascript/mixins", "javascript/this-binding"],
     relatedQuestions: ["js-31", "js-47", "js-03"],
-    sources: [
-      learnerList,
-      { label: "MDN — Inheritance and the prototype chain", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain", kind: "docs" },
-      { label: "MDN — Object.create()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create", kind: "docs" },
-      { label: "MDN — Object.setPrototypeOf() (performance warning)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────── 5. Hoisting
   {
@@ -442,12 +417,7 @@ TypeError`,
     ],
     relatedLessons: ["javascript/hoisting-tdz", "javascript/var-let-const", "javascript/execution-context", "javascript/scope"],
     relatedQuestions: ["js-06", "js-02"],
-    sources: [
-      learnerList,
-      { label: "MDN Glossary — Hoisting", url: "https://developer.mozilla.org/en-US/docs/Glossary/Hoisting", kind: "docs" },
-      { label: "MDN — let (temporal dead zone)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let", kind: "docs" },
-      { label: "ECMAScript — FunctionDeclarationInstantiation", url: "https://tc39.es/ecma262/#sec-functiondeclarationinstantiation", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 6. let, const, var
@@ -527,12 +497,7 @@ var leaks out of blocks undefined`,
     ],
     relatedLessons: ["javascript/var-let-const", "javascript/hoisting-tdz", "javascript/scope", "javascript/freeze-seal"],
     relatedQuestions: ["js-05", "js-02", "js-35"],
-    sources: [
-      learnerList,
-      { label: "MDN — let", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let", kind: "docs" },
-      { label: "MDN — const", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const", kind: "docs" },
-      { label: "MDN — var", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 7. async / await
@@ -613,12 +578,7 @@ p.then(v => console.log("5: resolved with", v));`,
     ],
     relatedLessons: ["javascript/async-await", "javascript/promises", "javascript/event-loop", "javascript/promise-combinators", "javascript/error-handling"],
     relatedQuestions: ["js-11", "js-09", "js-01", "js-41", "js-44"],
-    sources: [
-      learnerList,
-      { label: "MDN — async function", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function", kind: "docs" },
-      { label: "MDN — await", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await", kind: "docs" },
-      { label: "V8 blog — Faster async functions and promises", url: "https://v8.dev/blog/fast-async", kind: "external" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 8. Higher-order functions
@@ -699,12 +659,7 @@ console.log([3, 1, 2].sort((a, b) => a - b).join(","));`,
     ],
     relatedLessons: ["javascript/higher-order-functions", "javascript/map-filter-reduce", "javascript/closures", "javascript/currying", "javascript/memoization"],
     relatedQuestions: ["js-15", "js-02", "js-27", "js-36", "js-21"],
-    sources: [
-      learnerList,
-      { label: "MDN Glossary — First-class function", url: "https://developer.mozilla.org/en-US/docs/Glossary/First-class_Function", kind: "docs" },
-      { label: "MDN Glossary — Callback function", url: "https://developer.mozilla.org/en-US/docs/Glossary/Callback_function", kind: "docs" },
-      { label: "MDN — Array.prototype.sort()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────── 9. Promises
   {
@@ -801,13 +756,7 @@ finally`,
     ],
     relatedLessons: ["javascript/promises", "javascript/promise-combinators", "javascript/async-await", "javascript/event-loop", "javascript/callbacks"],
     relatedQuestions: ["js-41", "js-11", "js-07", "js-01"],
-    sources: [
-      learnerList,
-      { label: "MDN — Promise", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise", kind: "docs" },
-      { label: "MDN — Using promises", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises", kind: "docs" },
-      { label: "ECMAScript — Promise objects", url: "https://tc39.es/ecma262/#sec-promise-objects", kind: "docs" },
-      { label: "Node.js CLI — --unhandled-rejections", url: "https://nodejs.org/api/cli.html#--unhandled-rejectionsmode", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 10. == vs ===
@@ -889,11 +838,7 @@ false true`,
     ],
     relatedLessons: ["javascript/equality-coercion", "javascript/data-types", "javascript/null-vs-undefined"],
     relatedQuestions: ["js-12", "js-13"],
-    sources: [
-      learnerList,
-      { label: "MDN — Equality comparisons and sameness", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness", kind: "docs" },
-      { label: "ECMAScript — IsLooselyEqual", url: "https://tc39.es/ecma262/#sec-islooselyequal", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 11. Callbacks vs Promises vs async/await
@@ -985,12 +930,7 @@ async function main() {
     ],
     relatedLessons: ["javascript/callbacks", "javascript/promises", "javascript/async-await", "javascript/sync-vs-async", "javascript/error-handling"],
     relatedQuestions: ["js-07", "js-09", "js-14", "js-41"],
-    sources: [
-      learnerList,
-      { label: "MDN — Using promises", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises", kind: "docs" },
-      { label: "Node.js — util.promisify", url: "https://nodejs.org/api/util.html#utilpromisifyoriginal", kind: "docs" },
-      { label: "MDN Glossary — Callback function", url: "https://developer.mozilla.org/en-US/docs/Glossary/Callback_function", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 12. Data types
@@ -1073,12 +1013,7 @@ abc ABC
     ],
     relatedLessons: ["javascript/data-types", "javascript/equality-coercion", "javascript/null-vs-undefined", "javascript/symbols", "javascript/deep-copy"],
     relatedQuestions: ["js-13", "js-10", "js-25", "js-30"],
-    sources: [
-      learnerList,
-      { label: "MDN — JavaScript data types and data structures", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Data_structures", kind: "docs" },
-      { label: "MDN — typeof (including typeof null)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/typeof", kind: "docs" },
-      { label: "ECMAScript — ECMAScript language types", url: "https://tc39.es/ecma262/#sec-ecmascript-language-types", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────── 13. null vs undefined
   {
@@ -1164,12 +1099,7 @@ default fallback 0
     ],
     relatedLessons: ["javascript/null-vs-undefined", "javascript/data-types", "javascript/equality-coercion"],
     relatedQuestions: ["js-12", "js-10"],
-    sources: [
-      learnerList,
-      { label: "MDN — null", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/null", kind: "docs" },
-      { label: "MDN — undefined", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined", kind: "docs" },
-      { label: "MDN — Nullish coalescing operator (??)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Nullish_coalescing", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 14. Sync vs async
@@ -1239,12 +1169,7 @@ Promise.resolve().then(() => console.log("3 microtask"));`,
     ],
     relatedLessons: ["javascript/sync-vs-async", "javascript/event-loop", "javascript/callbacks", "javascript/promises", "nodejs/node-architecture", "nodejs/worker-threads"],
     relatedQuestions: ["js-01", "js-11", "js-07"],
-    sources: [
-      learnerList,
-      { label: "MDN — Introducing asynchronous JavaScript", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Extensions/Async_JS/Introducing", kind: "docs" },
-      { label: "Node.js — Overview of blocking vs non-blocking", url: "https://nodejs.org/en/learn/asynchronous-work/overview-of-blocking-vs-non-blocking", kind: "docs" },
-      { label: "Node.js — Don't block the event loop", url: "https://nodejs.org/en/learn/asynchronous-work/dont-block-the-event-loop", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 15. map, filter, reduce
@@ -1332,12 +1257,7 @@ TypeError`,
     ],
     relatedLessons: ["javascript/map-filter-reduce", "javascript/higher-order-functions"],
     relatedQuestions: ["js-08"],
-    sources: [
-      learnerList,
-      { label: "MDN — Array.prototype.map()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map", kind: "docs" },
-      { label: "MDN — Array.prototype.filter()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter", kind: "docs" },
-      { label: "MDN — Array.prototype.reduce()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 16. Arrow functions
@@ -1427,11 +1347,7 @@ true undefined`,
     ],
     relatedLessons: ["javascript/arrow-functions", "javascript/this-binding", "javascript/call-apply-bind"],
     relatedQuestions: ["js-29", "js-03", "js-23"],
-    sources: [
-      learnerList,
-      { label: "MDN — Arrow function expressions", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions", kind: "docs" },
-      { label: "ECMAScript — Arrow function definitions", url: "https://tc39.es/ecma262/#sec-arrow-function-definitions", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────── 17. Modules
   {
@@ -1523,13 +1439,7 @@ function
     ],
     relatedLessons: ["javascript/modules", "javascript/script-loading", "javascript/hoisting-tdz"],
     relatedQuestions: ["js-40", "js-48"],
-    sources: [
-      learnerList,
-      { label: "MDN — JavaScript modules", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules", kind: "docs" },
-      { label: "Node.js — ECMAScript modules", url: "https://nodejs.org/api/esm.html", kind: "docs" },
-      { label: "Node.js — Modules: CommonJS modules", url: "https://nodejs.org/api/modules.html", kind: "docs" },
-      { label: "ECMAScript — Modules", url: "https://tc39.es/ecma262/#sec-modules", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 18. Deep copying
@@ -1613,13 +1523,7 @@ DataCloneError`,
     ],
     relatedLessons: ["javascript/deep-copy", "javascript/json-circular", "javascript/data-types", "javascript/freeze-seal"],
     relatedQuestions: ["js-52", "js-35", "js-12"],
-    sources: [
-      learnerList,
-      { label: "MDN — structuredClone()", url: "https://developer.mozilla.org/en-US/docs/Web/API/Window/structuredClone", kind: "docs" },
-      { label: "MDN — The structured clone algorithm", url: "https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm", kind: "docs" },
-      { label: "MDN Glossary — Deep copy", url: "https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy", kind: "docs" },
-      { label: "MDN — JSON.stringify()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 19. for...of vs for...in
@@ -1702,12 +1606,7 @@ y=2`,
     ],
     relatedLessons: ["javascript/generators-iterators", "javascript/prototypes", "javascript/symbols"],
     relatedQuestions: ["js-45", "js-44", "js-04"],
-    sources: [
-      learnerList,
-      { label: "MDN — for...of", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of", kind: "docs" },
-      { label: "MDN — for...in", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...in", kind: "docs" },
-      { label: "MDN — Iteration protocols", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 20. Timers
@@ -1796,13 +1695,7 @@ timeout 20`,
     ],
     relatedLessons: ["javascript/timers", "javascript/event-loop", "javascript/debounce-throttle", "nodejs/node-event-loop"],
     relatedQuestions: ["js-01", "js-21", "js-14"],
-    sources: [
-      learnerList,
-      { label: "MDN — setTimeout()", url: "https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout", kind: "docs" },
-      { label: "MDN — setInterval()", url: "https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval", kind: "docs" },
-      { label: "HTML Standard — Timers", url: "https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers", kind: "docs" },
-      { label: "Node.js — Timers", url: "https://nodejs.org/api/timers.html", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────── 21. Debounce & throttle
   {
@@ -1888,12 +1781,7 @@ debounced search: react`,
     ],
     relatedLessons: ["javascript/debounce-throttle", "javascript/closures", "javascript/timers", "javascript/higher-order-functions", "javascript/performance"],
     relatedQuestions: ["js-02", "js-08", "js-20", "js-38"],
-    sources: [
-      learnerList,
-      { label: "MDN Glossary — Debounce", url: "https://developer.mozilla.org/en-US/docs/Glossary/Debounce", kind: "docs" },
-      { label: "MDN Glossary — Throttle", url: "https://developer.mozilla.org/en-US/docs/Glossary/Throttle", kind: "docs" },
-      { label: "Lodash — debounce", url: "https://lodash.com/docs/4.17.15#debounce", kind: "external" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 22. Event delegation
@@ -1973,12 +1861,7 @@ remove 3
     ],
     relatedLessons: ["javascript/event-delegation", "javascript/dom", "javascript/performance"],
     relatedQuestions: ["js-21", "js-32"],
-    sources: [
-      learnerList,
-      { label: "MDN — Event bubbling", url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Core/Scripting/Event_bubbling", kind: "docs" },
-      { label: "MDN — Element.closest()", url: "https://developer.mozilla.org/en-US/docs/Web/API/Element/closest", kind: "docs" },
-      { label: "DOM Standard — Dispatching events", url: "https://dom.spec.whatwg.org/#dispatching-events", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 23. call, apply, bind
@@ -2065,12 +1948,7 @@ bound introduce 1
     ],
     relatedLessons: ["javascript/call-apply-bind", "javascript/this-binding", "javascript/arrow-functions", "javascript/currying"],
     relatedQuestions: ["js-49", "js-03", "js-16", "js-27"],
-    sources: [
-      learnerList,
-      { label: "MDN — Function.prototype.call()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call", kind: "docs" },
-      { label: "MDN — Function.prototype.apply()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply", kind: "docs" },
-      { label: "MDN — Function.prototype.bind()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────── 24. try...catch
   {
@@ -2176,12 +2054,7 @@ caught async: network down`,
     ],
     relatedLessons: ["javascript/error-handling", "javascript/async-await", "javascript/promises", "javascript/call-stack"],
     relatedQuestions: ["js-34", "js-07", "js-09"],
-    sources: [
-      learnerList,
-      { label: "MDN — try...catch", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/try...catch", kind: "docs" },
-      { label: "MDN — Error", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error", kind: "docs" },
-      { label: "Node.js — Errors", url: "https://nodejs.org/api/errors.html", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 25. Array detection
@@ -2259,11 +2132,7 @@ false`,
     ],
     relatedLessons: ["javascript/data-types", "javascript/prototypes", "javascript/proxy-reflect"],
     relatedQuestions: ["js-12", "js-04"],
-    sources: [
-      learnerList,
-      { label: "MDN — Array.isArray()", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray", kind: "docs" },
-      { label: "ECMAScript — IsArray", url: "https://tc39.es/ecma262/#sec-isarray", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── 26. Closures with examples
@@ -2354,10 +2223,6 @@ info`,
     ],
     relatedLessons: ["javascript/closures", "javascript/scope", "javascript/memoization", "javascript/debounce-throttle", "javascript/var-let-const"],
     relatedQuestions: ["js-02", "js-06", "js-21", "js-36"],
-    sources: [
-      learnerList,
-      { label: "MDN — Closures (practical closures, emulating private methods)", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures", kind: "docs" },
-      { label: "MDN Glossary — IIFE", url: "https://developer.mozilla.org/en-US/docs/Glossary/IIFE", kind: "docs" },
-    ],
+    sources: [],
   },
 ];

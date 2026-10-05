@@ -10,47 +10,11 @@ import type { Lesson, Level, Frequency, ContentKind, SourceRef, Track } from "..
 // Source helpers
 // ---------------------------------------------------------------------------
 
-const mdn = (label: string, path: string): SourceRef => ({
-  label: `MDN: ${label}`,
-  url: `https://developer.mozilla.org/en-US/docs/${path}`,
-  kind: "docs",
-});
-const spec = (label: string, anchor: string): SourceRef => ({
-  label: `ECMAScript spec: ${label}`,
-  url: `https://tc39.es/ecma262/#${anchor}`,
-  kind: "docs",
-});
-const v8 = (label: string, path: string, note?: string): SourceRef => ({
-  label: `V8 blog: ${label}`,
-  url: `https://v8.dev/${path}`,
-  kind: "external",
-  ...(note ? { note } : {}),
-});
-const PRACTICE: SourceRef = {
-  label: "Learner's JS practice code (language-learning/JS)",
-  url: "https://github.com/saurabhraghuvanshii/language-learning/tree/main/JS",
-  kind: "original-note",
-};
 const LYDIA: SourceRef = {
   label: "lydiahallie/javascript-questions (MIT)",
   url: "https://github.com/lydiahallie/javascript-questions",
   kind: "external",
   note: "Output-prediction questions; licensed MIT.",
-};
-const HTML_EVENT_LOOP: SourceRef = {
-  label: "HTML Standard: Event loops",
-  url: "https://html.spec.whatwg.org/multipage/webappapis.html#event-loops",
-  kind: "docs",
-};
-const NODE_EVENT_LOOP: SourceRef = {
-  label: "Node.js: The event loop, timers and process.nextTick()",
-  url: "https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick",
-  kind: "docs",
-};
-const JAKE_TASKS: SourceRef = {
-  label: "Jake Archibald: Tasks, microtasks, queues and schedules",
-  url: "https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/",
-  kind: "external",
 };
 
 // ---------------------------------------------------------------------------
@@ -88,7 +52,7 @@ function outline(o: OutlineSpec): Lesson {
     prerequisites: o.prerequisites,
     related: o.related ?? [],
     tags: o.tags,
-    sources: [...o.sources, PRACTICE],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: o.objectives }] },
       {
@@ -283,20 +247,7 @@ export const track: Track = {
       exercises: ["javascript/promises", "javascript/async-await", "javascript/event-loop", "javascript/promise-combinators"],
     },
   ],
-  sources: [
-    { label: "ECMAScript Language Specification (latest draft)", url: "https://tc39.es/ecma262/", kind: "docs" },
-    { label: "MDN JavaScript Guide and Reference", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript", kind: "docs" },
-    HTML_EVENT_LOOP,
-    { label: "V8 blog", url: "https://v8.dev/blog", kind: "external", note: "Engine internals; implementation details, not spec guarantees." },
-    { label: "Node.js documentation", url: "https://nodejs.org/docs/latest/api/", kind: "docs" },
-    PRACTICE,
-    LYDIA,
-    {
-      label: "Learner's ChatGPT JavaScript interview-prep discussions",
-      kind: "inaccessible",
-      note: "Private conversations that could not be read; nothing was imported from them.",
-    },
-  ],
+  sources: [LYDIA],
 };
 
 // ===========================================================================
@@ -314,10 +265,7 @@ const foundations: Lesson[] = [
     prerequisites: [],
     related: ["javascript/operators-control-flow", "javascript/function-declarations-expressions"],
     tags: ["syntax", "asi", "statements", "expressions"],
-    sources: [
-      mdn("Lexical grammar — automatic semicolon insertion", "Web/JavaScript/Reference/Lexical_grammar#automatic_semicolon_insertion"),
-      spec("Automatic Semicolon Insertion", "sec-automatic-semicolon-insertion"),
-    ],
+    sources: [],
     objectives: [
       "Distinguish statements from expressions and explain where each is allowed",
       "State the three ASI rules and the 'restricted productions' (`return`, `throw`, `break`, `continue`, postfix `++`/`--`, arrow `=>`)",
@@ -343,11 +291,7 @@ const foundations: Lesson[] = [
     prerequisites: ["javascript/syntax-asi"],
     related: ["javascript/equality-coercion", "javascript/arrays-iteration"],
     tags: ["operators", "short-circuit", "nullish", "switch", "loops"],
-    sources: [
-      mdn("Expressions and operators", "Web/JavaScript/Reference/Operators"),
-      mdn("Operator precedence", "Web/JavaScript/Reference/Operators/Operator_precedence"),
-      mdn("Control flow and error handling", "Web/JavaScript/Guide/Control_flow_and_error_handling"),
-    ],
+    sources: [],
     objectives: [
       "Use `&&`, `||` and `??` knowing they return one of their operands, not a boolean",
       "Explain short-circuit evaluation and the logical assignment operators (`||=`, `&&=`, `??=`)",
@@ -377,13 +321,7 @@ const foundations: Lesson[] = [
     prerequisites: [],
     related: ["javascript/equality-coercion", "javascript/null-vs-undefined", "javascript/typeof-instanceof", "javascript/deep-copy", "javascript/memory-leaks-gc"],
     tags: ["types", "primitives", "objects", "references", "typeof", "pass-by-sharing"],
-    sources: [
-      mdn("JavaScript data types and data structures", "Web/JavaScript/Guide/Data_structures"),
-      mdn("typeof", "Web/JavaScript/Reference/Operators/typeof"),
-      spec("ECMAScript data types and values", "sec-ecmascript-data-types-and-values"),
-      v8("Pointer compression in V8", "blog/pointer-compression", "Explains Smis vs heap objects — engine detail."),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -638,12 +576,7 @@ console.log(a.x);` },
     prerequisites: ["javascript/data-types"],
     related: ["javascript/equality-coercion", "javascript/destructuring-spread", "javascript/json-circular"],
     tags: ["null", "undefined", "nullish", "default-parameters"],
-    sources: [
-      mdn("null", "Web/JavaScript/Reference/Operators/null"),
-      mdn("undefined", "Web/JavaScript/Reference/Global_Objects/undefined"),
-      mdn("Nullish coalescing operator (??)", "Web/JavaScript/Reference/Operators/Nullish_coalescing"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "List where the engine produces `undefined` on its own",
@@ -719,15 +652,7 @@ default default 0 default` },
     prerequisites: ["javascript/data-types"],
     related: ["javascript/null-vs-undefined", "javascript/typeof-instanceof", "javascript/symbols", "javascript/operators-control-flow"],
     tags: ["equality", "coercion", "ToPrimitive", "truthiness", "Object.is"],
-    sources: [
-      mdn("Equality comparisons and sameness", "Web/JavaScript/Guide/Equality_comparisons_and_sameness"),
-      mdn("Type coercion", "Glossary/Type_coercion"),
-      mdn("Symbol.toPrimitive", "Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive"),
-      spec("IsLooselyEqual", "sec-islooselyequal"),
-      spec("ToPrimitive", "sec-toprimitive"),
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [LYDIA],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain the four sameness algorithms: IsStrictlyEqual (`===`), IsLooselyEqual (`==`), SameValue (`Object.is`) and SameValueZero",
@@ -858,13 +783,7 @@ console.log(money + 1, \`\${money}\`, money == 42, String(money));`, output: `[o
     prerequisites: ["javascript/data-types"],
     related: ["javascript/prototypes", "javascript/equality-coercion", "javascript/symbols"],
     tags: ["typeof", "instanceof", "Array.isArray", "NaN", "BigInt"],
-    sources: [
-      mdn("typeof", "Web/JavaScript/Reference/Operators/typeof"),
-      mdn("instanceof", "Web/JavaScript/Reference/Operators/instanceof"),
-      mdn("Array.isArray()", "Web/JavaScript/Reference/Global_Objects/Array/isArray"),
-      mdn("Number.isNaN()", "Web/JavaScript/Reference/Global_Objects/Number/isNaN"),
-      mdn("BigInt", "Web/JavaScript/Reference/Global_Objects/BigInt"),
-    ],
+    sources: [],
     objectives: [
       "Know every `typeof` result and its two quirks (`null`, functions)",
       "Explain that `instanceof` walks the prototype chain (and can be customised with `Symbol.hasInstance`)",
@@ -891,12 +810,7 @@ console.log(money + 1, \`\${money}\`, money == 42, String(money));`, output: `[o
     prerequisites: ["javascript/data-types"],
     related: ["javascript/regex", "javascript/equality-coercion"],
     tags: ["strings", "unicode", "utf-16", "numbers", "Math", "Intl"],
-    sources: [
-      mdn("String", "Web/JavaScript/Reference/Global_Objects/String"),
-      mdn("Number", "Web/JavaScript/Reference/Global_Objects/Number"),
-      mdn("Math", "Web/JavaScript/Reference/Global_Objects/Math"),
-      mdn("Intl", "Web/JavaScript/Reference/Global_Objects/Intl"),
-    ],
+    sources: [],
     objectives: [
       "Explain why `\"😀\".length` is 2 (UTF-16 code units vs code points) and iterate strings by code point",
       "Use common string methods and template literals (including tagged templates)",
@@ -920,10 +834,7 @@ console.log(money + 1, \`\${money}\`, money == 42, String(money));`, output: `[o
     minutes: 30,
     prerequisites: ["javascript/strings-numbers-unicode"],
     tags: ["regex", "RegExp", "backtracking"],
-    sources: [
-      mdn("Regular expressions guide", "Web/JavaScript/Guide/Regular_expressions"),
-      mdn("RegExp", "Web/JavaScript/Reference/Global_Objects/RegExp"),
-    ],
+    sources: [],
     objectives: [
       "Write and read patterns with character classes, quantifiers, anchors and groups",
       "Use flags `g`, `i`, `m`, `s`, `u`, `v`, `y`, `d` appropriately",
@@ -949,12 +860,7 @@ console.log(money + 1, \`\${money}\`, money == 42, String(money));`, output: `[o
     prerequisites: ["javascript/data-types", "javascript/operators-control-flow"],
     related: ["javascript/map-filter-reduce", "javascript/generators-iterators", "javascript/typeof-instanceof"],
     tags: ["arrays", "for-of", "for-in", "mutation", "sorting"],
-    sources: [
-      mdn("Array", "Web/JavaScript/Reference/Global_Objects/Array"),
-      mdn("for...of", "Web/JavaScript/Reference/Statements/for...of"),
-      mdn("for...in", "Web/JavaScript/Reference/Statements/for...in"),
-      v8("Elements kinds in V8", "blog/elements-kinds", "Engine detail: packed vs holey arrays."),
-    ],
+    sources: [],
     objectives: [
       "Classify array methods as mutating (`push`, `splice`, `sort`, `reverse`) or copying (`map`, `slice`, `toSorted`, `toSpliced`, `with`)",
       "Choose `for…of` (values via the iterator) over `for…in` (enumerable string keys, including inherited ones) for arrays",
@@ -980,12 +886,7 @@ console.log(money + 1, \`\${money}\`, money == 42, String(money));`, output: `[o
     prerequisites: ["javascript/data-types"],
     related: ["javascript/prototypes", "javascript/freeze-seal", "javascript/getters-setters-static", "javascript/proxy-reflect"],
     tags: ["objects", "property-descriptors", "enumeration", "Object.keys"],
-    sources: [
-      mdn("Working with objects", "Web/JavaScript/Guide/Working_with_objects"),
-      mdn("Object.defineProperty()", "Web/JavaScript/Reference/Global_Objects/Object/defineProperty"),
-      mdn("Enumerability and ownership of properties", "Web/JavaScript/Guide/Enumerability_and_ownership_of_properties"),
-      v8("Fast properties in V8", "blog/fast-properties", "Hidden classes/shapes — engine detail."),
-    ],
+    sources: [],
     objectives: [
       "Explain data vs accessor property descriptors and their default attribute values",
       "Predict property enumeration order (integer keys ascending, then strings in insertion order, then symbols)",
@@ -1010,11 +911,7 @@ console.log(money + 1, \`\${money}\`, money == 42, String(money));`, output: `[o
     prerequisites: ["javascript/data-types", "javascript/null-vs-undefined"],
     related: ["javascript/deep-copy", "javascript/objects-descriptors"],
     tags: ["destructuring", "spread", "rest", "optional-chaining"],
-    sources: [
-      mdn("Destructuring assignment", "Web/JavaScript/Reference/Operators/Destructuring_assignment"),
-      mdn("Spread syntax", "Web/JavaScript/Reference/Operators/Spread_syntax"),
-      mdn("Optional chaining (?.)", "Web/JavaScript/Reference/Operators/Optional_chaining"),
-    ],
+    sources: [],
     objectives: [
       "Destructure nested objects/arrays with renaming and defaults (defaults apply only to `undefined`)",
       "Explain that object spread copies own enumerable properties shallowly and invokes getters",
@@ -1049,13 +946,7 @@ const scopeFunctions: Lesson[] = [
     prerequisites: ["javascript/data-types"],
     related: ["javascript/scope", "javascript/hoisting-tdz", "javascript/closures", "javascript/execution-context"],
     tags: ["var", "let", "const", "block-scope", "tdz", "loops"],
-    sources: [
-      mdn("var", "Web/JavaScript/Reference/Statements/var"),
-      mdn("let", "Web/JavaScript/Reference/Statements/let"),
-      mdn("const", "Web/JavaScript/Reference/Statements/const"),
-      spec("Let and Const Declarations", "sec-let-and-const-declarations"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Compare `var`, `let` and `const` across scope, hoisting, TDZ, redeclaration, reassignment and global-object behaviour",
@@ -1167,12 +1058,7 @@ o = { n: 3 };       // 3` }, options: ["1", "2", "3", "None"], answer: 2, explan
     prerequisites: ["javascript/var-let-const"],
     related: ["javascript/execution-context", "javascript/closures", "javascript/hoisting-tdz", "javascript/modules"],
     tags: ["scope", "lexical-scope", "scope-chain", "shadowing", "global"],
-    sources: [
-      mdn("Scope (glossary)", "Glossary/Scope"),
-      mdn("Closures — lexical scoping", "Web/JavaScript/Guide/Closures#lexical_scoping"),
-      spec("Environment Records", "sec-environment-records"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Name the kinds of scope: global, module, function, block (and the `catch` parameter, class bodies)",
@@ -1286,14 +1172,7 @@ function caller() { let v = 2; return read(); }` }, options: ["1", "2", "undefin
     prerequisites: ["javascript/var-let-const", "javascript/scope"],
     related: ["javascript/execution-context", "javascript/function-declarations-expressions", "javascript/classes-inheritance"],
     tags: ["hoisting", "tdz", "creation-phase", "function-declarations"],
-    sources: [
-      mdn("Hoisting (glossary)", "Glossary/Hoisting"),
-      mdn("let — temporal dead zone", "Web/JavaScript/Reference/Statements/let#temporal_dead_zone_tdz"),
-      spec("FunctionDeclarationInstantiation", "sec-functiondeclarationinstantiation"),
-      spec("GlobalDeclarationInstantiation", "sec-globaldeclarationinstantiation"),
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [LYDIA],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain hoisting as declaration instantiation, not as code being moved",
@@ -1438,14 +1317,7 @@ function foo() {}` }, options: ["\"undefined\"", "\"number\"", "\"function\"", "
     prerequisites: ["javascript/scope", "javascript/hoisting-tdz"],
     related: ["javascript/call-stack", "javascript/closures", "javascript/this-binding", "javascript/event-loop"],
     tags: ["execution-context", "lexical-environment", "environment-record", "creation-phase", "realm"],
-    sources: [
-      spec("Execution Contexts", "sec-execution-contexts"),
-      spec("Environment Records", "sec-environment-records"),
-      spec("FunctionDeclarationInstantiation", "sec-functiondeclarationinstantiation"),
-      mdn("Closures", "Web/JavaScript/Guide/Closures"),
-      v8("Blazingly fast parsing, part 2: lazy parsing", "blog/preparser", "How V8 decides which variables need heap contexts — engine detail."),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Define an execution context and list its key components (LexicalEnvironment, VariableEnvironment, Realm, Function, this via the function environment)",
@@ -1582,13 +1454,7 @@ console.log(greetAda());`, output: `hello, Ada!` },
     prerequisites: ["javascript/execution-context"],
     related: ["javascript/event-loop", "javascript/recursion", "javascript/tail-calls", "javascript/error-handling"],
     tags: ["call-stack", "stack-overflow", "stack-trace", "lifo", "data-structures"],
-    sources: [
-      mdn("Call stack (glossary)", "Glossary/Call_stack"),
-      mdn("RangeError: Maximum call stack size exceeded", "Web/JavaScript/Reference/Errors/Too_much_recursion"),
-      spec("Execution Contexts (execution context stack)", "sec-execution-contexts"),
-      v8("Stack trace API", "docs/stack-trace-api", "Includes V8's async stack traces — engine detail."),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Trace the call stack for nested calls",
@@ -1702,11 +1568,7 @@ console.log("C");` }, options: ["A B C", "B C A", "B A C", "A C B"], answer: 1, 
     prerequisites: ["javascript/hoisting-tdz"],
     related: ["javascript/arrow-functions", "javascript/iife", "javascript/this-binding"],
     tags: ["functions", "function-expression", "named-function-expression", "first-class"],
-    sources: [
-      mdn("Functions guide", "Web/JavaScript/Guide/Functions"),
-      mdn("function expression", "Web/JavaScript/Reference/Operators/function"),
-      mdn("Function.prototype.name", "Web/JavaScript/Reference/Global_Objects/Function/name"),
-    ],
+    sources: [],
     objectives: [
       "Tell a declaration from an expression by its position in the grammar",
       "Explain the hoisting difference (declaration fully hoisted, expression follows its variable)",
@@ -1734,15 +1596,7 @@ console.log("C");` }, options: ["A B C", "B C A", "B A C", "A C B"], answer: 1, 
     prerequisites: ["javascript/scope", "javascript/execution-context"],
     related: ["javascript/var-let-const", "javascript/higher-order-functions", "javascript/memoization", "javascript/debounce-throttle", "javascript/memory-leaks-gc", "javascript/iife", "javascript/currying"],
     tags: ["closures", "lexical-environment", "encapsulation", "loop-closure", "memory"],
-    sources: [
-      mdn("Closures", "Web/JavaScript/Guide/Closures"),
-      spec("OrdinaryFunctionCreate ([[Environment]])", "sec-ordinaryfunctioncreate"),
-      spec("Environment Records", "sec-environment-records"),
-      v8("Lazy parsing / preparser (context allocation)", "blog/preparser", "Engine detail on which variables are context-allocated."),
-      { label: "Meteor blog: An interesting kind of JavaScript memory leak", url: "https://blog.meteor.com/an-interesting-kind-of-javascript-memory-leak-8b47d2e7f156", kind: "external", note: "Classic write-up of shared-context retention." },
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Define a closure precisely and explain why every JavaScript function is technically one",
@@ -1914,10 +1768,7 @@ console.log(f()());` }, options: ["1", "2", "undefined", "ReferenceError"], answ
     prerequisites: ["javascript/call-stack"],
     related: ["javascript/tail-calls", "javascript/deep-copy", "javascript/memoization", "dsa/recursion"],
     tags: ["recursion", "base-case", "stack-overflow", "trees"],
-    sources: [
-      mdn("Recursion (glossary)", "Glossary/Recursion"),
-      mdn("Functions — recursion", "Web/JavaScript/Guide/Functions#recursion"),
-    ],
+    sources: [],
     objectives: [
       "Write recursive functions with explicit base cases and progress toward them",
       "Trace the call stack of a recursive call and estimate its depth",
@@ -1942,7 +1793,7 @@ console.log(f()());` }, options: ["1", "2", "undefined", "ReferenceError"], answ
     prerequisites: ["javascript/function-declarations-expressions", "javascript/closures"],
     related: ["javascript/modules", "javascript/singleton"],
     tags: ["iife", "module-pattern", "scope"],
-    sources: [mdn("IIFE (glossary)", "Glossary/IIFE")],
+    sources: [],
     objectives: [
       "Explain why the wrapping parentheses are needed (expression vs declaration)",
       "Use an IIFE to create private state (the module pattern)",
@@ -1967,10 +1818,7 @@ console.log(f()());` }, options: ["1", "2", "undefined", "ReferenceError"], answ
     prerequisites: ["javascript/closures"],
     related: ["javascript/map-filter-reduce", "javascript/currying", "javascript/memoization", "javascript/debounce-throttle"],
     tags: ["higher-order-functions", "first-class-functions", "composition"],
-    sources: [
-      mdn("First-class function (glossary)", "Glossary/First-class_Function"),
-      mdn("Functions guide", "Web/JavaScript/Guide/Functions"),
-    ],
+    sources: [],
     objectives: [
       "Define first-class and higher-order functions",
       "Write wrappers (`logged`, `once`, `memoize`) that forward `this` and arguments",
@@ -1996,11 +1844,7 @@ console.log(f()());` }, options: ["1", "2", "undefined", "ReferenceError"], answ
     prerequisites: ["javascript/higher-order-functions", "javascript/arrays-iteration"],
     related: ["javascript/higher-order-functions"],
     tags: ["map", "filter", "reduce", "arrays", "polyfill"],
-    sources: [
-      mdn("Array.prototype.map()", "Web/JavaScript/Reference/Global_Objects/Array/map"),
-      mdn("Array.prototype.filter()", "Web/JavaScript/Reference/Global_Objects/Array/filter"),
-      mdn("Array.prototype.reduce()", "Web/JavaScript/Reference/Global_Objects/Array/reduce"),
-    ],
+    sources: [],
     objectives: [
       "State what each returns (new array of same length / subset / single accumulated value)",
       "Explain `reduce` without an initial value (first element is the accumulator; empty array throws TypeError)",
@@ -2026,10 +1870,7 @@ console.log(f()());` }, options: ["1", "2", "undefined", "ReferenceError"], answ
     prerequisites: ["javascript/closures", "javascript/higher-order-functions"],
     related: ["javascript/call-apply-bind"],
     tags: ["currying", "partial-application", "closures"],
-    sources: [
-      mdn("Function.prototype.length", "Web/JavaScript/Reference/Global_Objects/Function/length"),
-      mdn("Function.prototype.bind() — partial functions", "Web/JavaScript/Reference/Global_Objects/Function/bind"),
-    ],
+    sources: [],
     objectives: [
       "Distinguish currying from partial application",
       "Implement a generic `curry(fn)` using `fn.length` and closures",
@@ -2057,13 +1898,7 @@ console.log(f()());` }, options: ["1", "2", "undefined", "ReferenceError"], answ
     prerequisites: ["javascript/execution-context", "javascript/function-declarations-expressions"],
     related: ["javascript/call-apply-bind", "javascript/arrow-functions", "javascript/classes-inheritance", "javascript/prototypes"],
     tags: ["this", "binding", "strict-mode", "method", "lexical-this"],
-    sources: [
-      mdn("this", "Web/JavaScript/Reference/Operators/this"),
-      spec("OrdinaryCallBindThis", "sec-ordinarycallbindthis"),
-      spec("Function Environment Records", "sec-function-environment-records"),
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [LYDIA],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Determine `this` for any call using the precedence: `new` > explicit (`bind`/`call`/`apply`) > implicit (method call) > default",
@@ -2225,13 +2060,7 @@ console.log(counter.start());` }, options: ["0", "3", "NaN", "TypeError"], answe
     prerequisites: ["javascript/this-binding"],
     related: ["javascript/arrow-functions", "javascript/currying", "javascript/symbols"],
     tags: ["call", "apply", "bind", "this", "polyfill", "partial-application"],
-    sources: [
-      mdn("Function.prototype.call()", "Web/JavaScript/Reference/Global_Objects/Function/call"),
-      mdn("Function.prototype.apply()", "Web/JavaScript/Reference/Global_Objects/Function/apply"),
-      mdn("Function.prototype.bind()", "Web/JavaScript/Reference/Global_Objects/Function/bind"),
-      spec("Bound Function Exotic Objects", "sec-bound-function-exotic-objects"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Use `call` (args listed), `apply` (args as array-like) and `bind` (returns a new function)",
@@ -2369,11 +2198,7 @@ console.log(g.call({ v: 2 }));` }, options: ["1", "2", "undefined", "TypeError"]
     prerequisites: ["javascript/this-binding", "javascript/function-declarations-expressions"],
     related: ["javascript/call-apply-bind", "javascript/closures", "javascript/classes-inheritance"],
     tags: ["arrow-functions", "lexical-this", "arguments", "constructors"],
-    sources: [
-      mdn("Arrow function expressions", "Web/JavaScript/Reference/Functions/Arrow_functions"),
-      spec("Arrow Function Definitions", "sec-arrow-function-definitions"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "List every semantic difference between arrows and regular functions",
@@ -2494,14 +2319,7 @@ const objectsOop: Lesson[] = [
     prerequisites: ["javascript/data-types", "javascript/this-binding"],
     related: ["javascript/classes-inheritance", "javascript/objects-descriptors", "javascript/mixins", "javascript/typeof-instanceof"],
     tags: ["prototype", "prototype-chain", "delegation", "new", "instanceof", "__proto__"],
-    sources: [
-      mdn("Inheritance and the prototype chain", "Web/JavaScript/Guide/Inheritance_and_the_prototype_chain"),
-      mdn("Object.create()", "Web/JavaScript/Reference/Global_Objects/Object/create"),
-      spec("Ordinary Object Internal Methods ([[Get]], [[Set]])", "sec-ordinary-object-internal-methods-and-internal-slots"),
-      v8("Fast properties in V8", "blog/fast-properties", "Hidden classes and inline caches — engine detail."),
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [LYDIA],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain property lookup along the `[[Prototype]]` chain and why writes don't go up the chain",
@@ -2664,14 +2482,7 @@ console.log(a.x);` }, options: ["1", "2", "undefined", "TypeError"], answer: 1, 
     prerequisites: ["javascript/prototypes"],
     related: ["javascript/getters-setters-static", "javascript/private-fields", "javascript/mixins", "javascript/this-binding", "javascript/decorators"],
     tags: ["class", "extends", "super", "constructor", "overriding", "fields"],
-    sources: [
-      mdn("Classes", "Web/JavaScript/Reference/Classes"),
-      mdn("extends", "Web/JavaScript/Reference/Classes/extends"),
-      mdn("super", "Web/JavaScript/Reference/Operators/super"),
-      mdn("Public class fields", "Web/JavaScript/Reference/Classes/Public_class_fields"),
-      spec("Class Definitions", "sec-class-definitions"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Map class syntax to the prototype objects it creates (two chains: instances and constructors)",
@@ -2800,12 +2611,7 @@ console.log(new Derived().kind);`, output: `derived:undefined` },
     prerequisites: ["javascript/classes-inheritance", "javascript/objects-descriptors"],
     related: ["javascript/private-fields", "javascript/singleton"],
     tags: ["getters", "setters", "static", "accessors"],
-    sources: [
-      mdn("get", "Web/JavaScript/Reference/Functions/get"),
-      mdn("set", "Web/JavaScript/Reference/Functions/set"),
-      mdn("static", "Web/JavaScript/Reference/Classes/static"),
-      mdn("Static initialization blocks", "Web/JavaScript/Reference/Classes/Static_initialization_blocks"),
-    ],
+    sources: [],
     objectives: [
       "Define accessors in object literals, classes and with `Object.defineProperty`",
       "Avoid infinite recursion when a setter writes to its own name (use a backing `#field`)",
@@ -2829,10 +2635,7 @@ console.log(new Derived().kind);`, output: `derived:undefined` },
     prerequisites: ["javascript/classes-inheritance"],
     related: ["javascript/closures", "javascript/weakmap-weakset", "javascript/proxy-reflect"],
     tags: ["private-fields", "encapsulation", "brand-check"],
-    sources: [
-      mdn("Private elements", "Web/JavaScript/Reference/Classes/Private_properties"),
-      spec("PrivateEnvironment Records", "sec-privateenvironment-records"),
-    ],
+    sources: [],
     objectives: [
       "Declare private fields, methods, accessors and statics",
       "Explain why accessing `#x` on a foreign object throws a TypeError (brand check) and how `#x in obj` tests for it",
@@ -2856,10 +2659,7 @@ console.log(new Derived().kind);`, output: `derived:undefined` },
     prerequisites: ["javascript/classes-inheritance"],
     related: ["javascript/prototypes", "javascript/higher-order-functions", "javascript/symbols"],
     tags: ["mixins", "composition", "inheritance"],
-    sources: [
-      mdn("Mix-ins (extends)", "Web/JavaScript/Reference/Classes/extends#mix-ins"),
-      { label: "Justin Fagnani: \"Real\" Mixins with JavaScript Classes", url: "https://justinfagnani.com/2015/12/21/real-mixins-with-javascript-classes/", kind: "external" },
-    ],
+    sources: [],
     objectives: [
       "Explain composition over inheritance with concrete examples",
       "Implement `Object.assign` mixins and know their limits (getters are flattened, `super` doesn't work)",
@@ -2884,10 +2684,7 @@ console.log(new Derived().kind);`, output: `derived:undefined` },
     prerequisites: ["javascript/data-types", "javascript/objects-descriptors"],
     related: ["javascript/generators-iterators", "javascript/equality-coercion", "javascript/mixins"],
     tags: ["symbol", "well-known-symbols", "Symbol.iterator", "metaprogramming"],
-    sources: [
-      mdn("Symbol", "Web/JavaScript/Reference/Global_Objects/Symbol"),
-      spec("Well-Known Symbols", "sec-well-known-symbols"),
-    ],
+    sources: [],
     objectives: [
       "Create symbols and use them as collision-free property keys",
       "Explain that symbol keys are skipped by `for…in`, `Object.keys` and `JSON.stringify` (but not by `Reflect.ownKeys`)",
@@ -2914,12 +2711,7 @@ console.log(new Derived().kind);`, output: `derived:undefined` },
     prerequisites: ["javascript/prototypes", "javascript/objects-descriptors"],
     related: ["javascript/freeze-seal", "javascript/private-fields", "javascript/symbols"],
     tags: ["proxy", "reflect", "metaprogramming", "traps", "reactivity"],
-    sources: [
-      mdn("Proxy", "Web/JavaScript/Reference/Global_Objects/Proxy"),
-      mdn("Reflect", "Web/JavaScript/Reference/Global_Objects/Reflect"),
-      mdn("Meta programming guide", "Web/JavaScript/Guide/Meta_programming"),
-      spec("Proxy Object Internal Methods", "sec-proxy-object-internal-methods-and-internal-slots"),
-    ],
+    sources: [],
     objectives: [
       "Map each trap (`get`, `set`, `has`, `deleteProperty`, `ownKeys`, `apply`, `construct`…) to the internal method it intercepts",
       "Forward with `Reflect.*` and pass the `receiver` so getters and inheritance keep working",
@@ -2945,11 +2737,7 @@ console.log(new Derived().kind);`, output: `derived:undefined` },
     prerequisites: ["javascript/objects-descriptors"],
     related: ["javascript/deep-copy", "javascript/proxy-reflect", "javascript/var-let-const"],
     tags: ["freeze", "seal", "preventExtensions", "immutability"],
-    sources: [
-      mdn("Object.freeze()", "Web/JavaScript/Reference/Global_Objects/Object/freeze"),
-      mdn("Object.seal()", "Web/JavaScript/Reference/Global_Objects/Object/seal"),
-      mdn("Object.preventExtensions()", "Web/JavaScript/Reference/Global_Objects/Object/preventExtensions"),
-    ],
+    sources: [],
     objectives: [
       "Tabulate add/delete/modify/reconfigure permissions for preventExtensions, seal and freeze",
       "Explain the descriptor changes each makes (configurable false; writable false for freeze)",
@@ -2977,14 +2765,7 @@ console.log(new Derived().kind);`, output: `derived:undefined` },
     prerequisites: ["javascript/data-types", "javascript/destructuring-spread"],
     related: ["javascript/json-circular", "javascript/weakmap-weakset", "javascript/freeze-seal", "javascript/recursion", "javascript/map-set"],
     tags: ["deep-copy", "shallow-copy", "structuredClone", "JSON", "cycles", "immutability"],
-    sources: [
-      mdn("structuredClone()", "Web/API/Window/structuredClone"),
-      mdn("The structured clone algorithm", "Web/API/Web_Workers_API/Structured_clone_algorithm"),
-      mdn("Shallow copy (glossary)", "Glossary/Shallow_copy"),
-      mdn("Deep copy (glossary)", "Glossary/Deep_copy"),
-      { label: "HTML Standard: StructuredSerialize", url: "https://html.spec.whatwg.org/multipage/structured-data.html#structuredserialize", kind: "docs" },
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain what a shallow copy shares and what a deep copy duplicates",
@@ -3148,11 +2929,7 @@ console.log(a.n.v);` }, options: ["1", "2", "undefined", "TypeError"], answer: 1
     prerequisites: ["javascript/data-types", "javascript/equality-coercion"],
     related: ["javascript/weakmap-weakset", "javascript/memoization", "javascript/generators-iterators"],
     tags: ["Map", "Set", "collections", "SameValueZero"],
-    sources: [
-      mdn("Map", "Web/JavaScript/Reference/Global_Objects/Map"),
-      mdn("Set", "Web/JavaScript/Reference/Global_Objects/Set"),
-      mdn("Keyed collections guide", "Web/JavaScript/Guide/Keyed_collections"),
-    ],
+    sources: [],
     objectives: [
       "Use `Map` for dictionaries with non-string keys or frequent add/delete",
       "Use `Set` for uniqueness and the ES2025 set methods (`union`, `intersection`, `difference`…) where available",
@@ -3177,12 +2954,7 @@ console.log(a.n.v);` }, options: ["1", "2", "undefined", "TypeError"], answer: 1
     prerequisites: ["javascript/map-set", "javascript/memory-leaks-gc"],
     related: ["javascript/deep-copy", "javascript/memoization", "javascript/private-fields"],
     tags: ["WeakMap", "WeakSet", "WeakRef", "garbage-collection", "ephemeron"],
-    sources: [
-      mdn("WeakMap", "Web/JavaScript/Reference/Global_Objects/WeakMap"),
-      mdn("WeakSet", "Web/JavaScript/Reference/Global_Objects/WeakSet"),
-      mdn("WeakRef", "Web/JavaScript/Reference/Global_Objects/WeakRef"),
-      mdn("FinalizationRegistry", "Web/JavaScript/Reference/Global_Objects/FinalizationRegistry"),
-    ],
+    sources: [],
     objectives: [
       "Explain weak references: an entry disappears once its key is otherwise unreachable",
       "Know why WeakMaps aren't iterable and have no `size` (GC timing must not be observable)",
@@ -3214,10 +2986,7 @@ const asyncJs: Lesson[] = [
     prerequisites: ["javascript/call-stack"],
     related: ["javascript/event-loop", "javascript/callbacks", "javascript/promises", "nodejs/node-event-loop"],
     tags: ["async", "non-blocking", "single-threaded", "concurrency"],
-    sources: [
-      mdn("Introducing asynchronous JavaScript", "Learn_web_development/Extensions/Async_JS/Introducing"),
-      HTML_EVENT_LOOP,
-    ],
+    sources: [],
     objectives: [
       "Define synchronous (blocking, run-to-completion) and asynchronous (start now, finish later via a callback/promise) operations",
       "Explain that JS runs on one thread per agent while the host (browser, libuv) performs I/O and timers in parallel",
@@ -3246,16 +3015,7 @@ const asyncJs: Lesson[] = [
     prerequisites: ["javascript/call-stack", "javascript/sync-vs-async"],
     related: ["javascript/promises", "javascript/async-await", "javascript/timers", "nodejs/node-event-loop", "javascript/storage-workers-raf"],
     tags: ["event-loop", "microtasks", "macrotasks", "task-queue", "rendering", "queueMicrotask", "node"],
-    sources: [
-      HTML_EVENT_LOOP,
-      spec("Jobs and Host Operations to Enqueue Jobs", "sec-jobs"),
-      mdn("The event loop / JavaScript execution model", "Web/JavaScript/Reference/Execution_model"),
-      mdn("Using microtasks (queueMicrotask)", "Web/API/HTML_DOM_API/Microtask_guide"),
-      JAKE_TASKS,
-      NODE_EVENT_LOOP,
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [LYDIA],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Describe one iteration of the browser event loop: pick a task, run it, perform a microtask checkpoint, maybe render",
@@ -3449,10 +3209,7 @@ console.log("D");` }, options: ["D A B C", "D B C A", "B C D A", "D C B A"], ans
     prerequisites: ["javascript/higher-order-functions", "javascript/sync-vs-async"],
     related: ["javascript/promises", "javascript/event-loop", "javascript/error-handling"],
     tags: ["callbacks", "error-first", "callback-hell", "promisify"],
-    sources: [
-      mdn("Callback function (glossary)", "Glossary/Callback_function"),
-      { label: "Node.js: util.promisify", url: "https://nodejs.org/api/util.html#utilpromisifyoriginal", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Distinguish synchronous callbacks (`map`) from asynchronous ones (`setTimeout`, `fs.readFile`)",
       "Use Node's error-first signature `(err, result)` and propagate errors correctly",
@@ -3481,15 +3238,7 @@ console.log("D");` }, options: ["D A B C", "D B C A", "B C D A", "D C B A"], ans
     prerequisites: ["javascript/callbacks", "javascript/event-loop"],
     related: ["javascript/async-await", "javascript/promise-combinators", "javascript/error-handling", "javascript/timers"],
     tags: ["promises", "then", "chaining", "microtasks", "error-propagation", "thenable"],
-    sources: [
-      mdn("Using promises", "Web/JavaScript/Guide/Using_promises"),
-      mdn("Promise", "Web/JavaScript/Reference/Global_Objects/Promise"),
-      spec("Promise Objects", "sec-promise-objects"),
-      { label: "Promises/A+ specification", url: "https://promisesaplus.com/", kind: "docs" },
-      JAKE_TASKS,
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [LYDIA],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Name the three states and explain that settlement happens once",
@@ -3654,14 +3403,7 @@ function promisify(fn) {
     prerequisites: ["javascript/promises", "javascript/event-loop"],
     related: ["javascript/promise-combinators", "javascript/generators-iterators", "javascript/async-iteration", "javascript/error-handling", "javascript/abortcontroller"],
     tags: ["async", "await", "microtasks", "error-handling", "concurrency", "top-level-await"],
-    sources: [
-      mdn("async function", "Web/JavaScript/Reference/Statements/async_function"),
-      mdn("await", "Web/JavaScript/Reference/Operators/await"),
-      spec("Await", "sec-await"),
-      v8("Faster async functions and promises", "blog/fast-async", "Explains the await optimisation (fewer ticks) — V8 7.2 / ES2019 spec change."),
-      LYDIA,
-      PRACTICE,
-    ],
+    sources: [LYDIA],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "State what an async function returns in every case (return value, throw, returned promise)",
@@ -3829,12 +3571,7 @@ console.log(2);` }, options: ["1 2 3", "1 3 2", "2 1 3", "3 1 2"], answer: 0, ex
     prerequisites: ["javascript/promises"],
     related: ["javascript/async-await", "javascript/abortcontroller", "javascript/error-handling"],
     tags: ["Promise.all", "Promise.allSettled", "Promise.race", "Promise.any", "AggregateError", "concurrency"],
-    sources: [
-      mdn("Promise.all()", "Web/JavaScript/Reference/Global_Objects/Promise/all"),
-      mdn("Promise.allSettled()", "Web/JavaScript/Reference/Global_Objects/Promise/allSettled"),
-      mdn("Promise.race()", "Web/JavaScript/Reference/Global_Objects/Promise/race"),
-      mdn("Promise.any()", "Web/JavaScript/Reference/Global_Objects/Promise/any"),
-    ],
+    sources: [],
     objectives: [
       "State each combinator's rule: all (all fulfil, or first rejection), allSettled (always fulfils with outcomes), race (first to settle), any (first fulfilment, or AggregateError)",
       "Know the empty-iterable results: all/allSettled → `[]`, any → rejects with AggregateError, race → forever pending",
@@ -3863,13 +3600,7 @@ console.log(2);` }, options: ["1 2 3", "1 3 2", "2 1 3", "3 1 2"], answer: 0, ex
     prerequisites: ["javascript/event-loop"],
     related: ["javascript/debounce-throttle", "javascript/storage-workers-raf", "javascript/abortcontroller", "nodejs/node-event-loop"],
     tags: ["setTimeout", "setInterval", "clearTimeout", "clamping", "setImmediate"],
-    sources: [
-      mdn("setTimeout()", "Web/API/Window/setTimeout"),
-      mdn("setInterval()", "Web/API/Window/setInterval"),
-      { label: "HTML Standard: Timers", url: "https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#timers", kind: "docs" },
-      NODE_EVENT_LOOP,
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain that a timer's delay is a *minimum* before its callback is queued as a task",
@@ -3980,13 +3711,7 @@ console.log("s");` }, options: ["t p s", "s t p", "s p t", "p s t"], answer: 2, 
     prerequisites: ["javascript/symbols", "javascript/closures"],
     related: ["javascript/async-iteration", "javascript/async-await", "javascript/arrays-iteration", "javascript/map-set"],
     tags: ["iterators", "iterables", "Symbol.iterator", "generators", "yield", "lazy-evaluation"],
-    sources: [
-      mdn("Iteration protocols", "Web/JavaScript/Reference/Iteration_protocols"),
-      mdn("function*", "Web/JavaScript/Reference/Statements/function*"),
-      mdn("Generator", "Web/JavaScript/Reference/Global_Objects/Generator"),
-      spec("Generator Objects", "sec-generator-objects"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Define the iterable and iterator protocols precisely",
@@ -4147,11 +3872,7 @@ caught inside err
     prerequisites: ["javascript/generators-iterators", "javascript/async-await"],
     related: ["javascript/fetch-http", "javascript/abortcontroller", "nodejs/streams-buffers"],
     tags: ["for-await", "async-generators", "Symbol.asyncIterator", "streams", "pagination"],
-    sources: [
-      mdn("for await...of", "Web/JavaScript/Reference/Statements/for-await...of"),
-      mdn("async function*", "Web/JavaScript/Reference/Statements/async_function*"),
-      mdn("Symbol.asyncIterator", "Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator"),
-    ],
+    sources: [],
     objectives: [
       "Define the async iterator protocol (`next()` returns a promise of `{ value, done }`)",
       "Write an async generator that paginates an API lazily",
@@ -4178,12 +3899,7 @@ caught inside err
     prerequisites: ["javascript/promises", "javascript/async-await"],
     related: ["javascript/fetch-http", "javascript/timers", "javascript/promise-combinators", "javascript/memory-leaks-gc"],
     tags: ["AbortController", "AbortSignal", "cancellation", "timeouts"],
-    sources: [
-      mdn("AbortController", "Web/API/AbortController"),
-      mdn("AbortSignal", "Web/API/AbortSignal"),
-      mdn("AbortSignal.timeout()", "Web/API/AbortSignal/timeout_static"),
-      mdn("AbortSignal.any()", "Web/API/AbortSignal/any_static"),
-    ],
+    sources: [],
     objectives: [
       "Abort a `fetch` and distinguish `AbortError` (user abort) from `TimeoutError` (`AbortSignal.timeout`)",
       "Make your own async functions abortable: check `signal.aborted`, listen for `abort`, call `signal.throwIfAborted()`",
@@ -4215,12 +3931,7 @@ const browser: Lesson[] = [
     prerequisites: ["javascript/objects-descriptors"],
     related: ["javascript/dom-manipulation", "javascript/dom-events-bubbling", "react/virtual-dom"],
     tags: ["dom", "nodes", "elements", "traversal", "querySelector"],
-    sources: [
-      mdn("Document Object Model (DOM)", "Web/API/Document_Object_Model"),
-      mdn("Node", "Web/API/Node"),
-      mdn("Element", "Web/API/Element"),
-      { label: "DOM Living Standard", url: "https://dom.spec.whatwg.org/", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Explain how HTML is parsed into a tree of nodes and how the DOM differs from the HTML source",
       "Distinguish Node (any node: text, comment, element…) from Element (tag nodes) and their APIs (`childNodes` vs `children`)",
@@ -4246,12 +3957,7 @@ const browser: Lesson[] = [
     prerequisites: ["javascript/dom"],
     related: ["javascript/performance", "javascript/cors-browser-security", "javascript/event-delegation"],
     tags: ["dom", "attributes", "properties", "innerHTML", "xss", "reflow"],
-    sources: [
-      mdn("Document.createElement()", "Web/API/Document/createElement"),
-      mdn("Element.append()", "Web/API/Element/append"),
-      mdn("HTML attribute reference — content vs IDL attributes", "Web/HTML/Attributes"),
-      mdn("Element.innerHTML — security considerations", "Web/API/Element/innerHTML"),
-    ],
+    sources: [],
     objectives: [
       "Create, insert (`append`, `prepend`, `before`, `after`, `insertAdjacentHTML`), replace and remove nodes",
       "Explain attributes (HTML source, strings) vs properties (live JS state) with `value`, `checked`, `class`/`className`",
@@ -4276,11 +3982,7 @@ const browser: Lesson[] = [
     prerequisites: ["javascript/dom"],
     related: ["javascript/event-delegation", "javascript/this-binding", "javascript/event-loop"],
     tags: ["events", "bubbling", "capturing", "addEventListener", "preventDefault"],
-    sources: [
-      mdn("Event bubbling", "Learn_web_development/Core/Scripting/Event_bubbling"),
-      mdn("EventTarget.addEventListener()", "Web/API/EventTarget/addEventListener"),
-      { label: "DOM Standard: Dispatching events", url: "https://dom.spec.whatwg.org/#dispatching-events", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Describe the capture → target → bubble phases and the propagation path",
       "Use `addEventListener` options: `capture`, `once`, `passive`, `signal`",
@@ -4310,12 +4012,7 @@ const browser: Lesson[] = [
     prerequisites: ["javascript/dom-events-bubbling"],
     related: ["javascript/dom", "javascript/memory-leaks-gc", "javascript/performance", "react/rendering-reconciliation"],
     tags: ["event-delegation", "bubbling", "closest", "performance", "dynamic-content"],
-    sources: [
-      mdn("Event bubbling — event delegation", "Learn_web_development/Core/Scripting/Event_bubbling#event_delegation"),
-      mdn("Element.closest()", "Web/API/Element/closest"),
-      mdn("Event.target", "Web/API/Event/target"),
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain how delegation relies on bubbling",
@@ -4454,12 +4151,7 @@ delegate(document.body, "click", "[data-action]", (e, el) => {
     prerequisites: ["javascript/promises", "javascript/async-await"],
     related: ["javascript/abortcontroller", "javascript/json-circular", "javascript/cors-browser-security", "networks/http", "javascript/url-formdata"],
     tags: ["fetch", "http", "headers", "response", "json"],
-    sources: [
-      mdn("Using the Fetch API", "Web/API/Fetch_API/Using_Fetch"),
-      mdn("Response", "Web/API/Response"),
-      mdn("Headers", "Web/API/Headers"),
-      { label: "Fetch Living Standard", url: "https://fetch.spec.whatwg.org/", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Use `fetch` with method, headers, body and credentials options",
       "Explain that `fetch` rejects only on network failure/abort — check `response.ok`/`status` yourself",
@@ -4487,11 +4179,7 @@ delegate(document.body, "click", "[data-action]", (e, el) => {
     prerequisites: ["javascript/data-types", "javascript/objects-descriptors"],
     related: ["javascript/deep-copy", "javascript/weakmap-weakset", "backend/serialization"],
     tags: ["json", "stringify", "parse", "circular-references", "serialization"],
-    sources: [
-      mdn("JSON.stringify()", "Web/JavaScript/Reference/Global_Objects/JSON/stringify"),
-      mdn("JSON.parse()", "Web/JavaScript/Reference/Global_Objects/JSON/parse"),
-      mdn("TypeError: cyclic object value", "Web/JavaScript/Reference/Errors/Cyclic_object_value"),
-    ],
+    sources: [],
     objectives: [
       "Predict stringify output for undefined, functions, symbols, NaN/Infinity, Dates, Maps, BigInt (throws) and nested arrays",
       "Use `toJSON`, replacer functions/arrays, `space`, and `parse` revivers (e.g. reviving Dates)",
@@ -4517,11 +4205,7 @@ delegate(document.body, "click", "[data-action]", (e, el) => {
     prerequisites: ["javascript/fetch-http"],
     related: ["javascript/fetch-http", "networks/http"],
     tags: ["URL", "URLSearchParams", "FormData", "encoding"],
-    sources: [
-      mdn("URL", "Web/API/URL"),
-      mdn("URLSearchParams", "Web/API/URLSearchParams"),
-      mdn("FormData", "Web/API/FormData"),
-    ],
+    sources: [],
     objectives: [
       "Parse and build URLs with `new URL(path, base)` instead of string concatenation",
       "Read and write query parameters (including repeated keys) with URLSearchParams",
@@ -4545,11 +4229,7 @@ delegate(document.body, "click", "[data-action]", (e, el) => {
     prerequisites: ["javascript/fetch-http"],
     related: ["networks/cors", "backend/csrf", "javascript/dom-manipulation"],
     tags: ["cors", "same-origin-policy", "preflight", "xss", "csp", "samesite"],
-    sources: [
-      mdn("Cross-Origin Resource Sharing (CORS)", "Web/HTTP/Guides/CORS"),
-      mdn("Same-origin policy", "Web/Security/Same-origin_policy"),
-      mdn("Content Security Policy (CSP)", "Web/HTTP/Guides/CSP"),
-    ],
+    sources: [],
     objectives: [
       "Define an origin and what the same-origin policy blocks (reading responses, not sending requests)",
       "Explain simple vs preflighted requests and the `OPTIONS` handshake headers",
@@ -4578,16 +4258,7 @@ delegate(document.body, "click", "[data-action]", (e, el) => {
     prerequisites: ["javascript/scope", "javascript/hoisting-tdz"],
     related: ["javascript/script-loading", "javascript/bundling-transpilation", "javascript/singleton", "javascript/iife", "nodejs/node-architecture"],
     tags: ["esm", "import", "export", "commonjs", "dynamic-import", "top-level-await", "live-bindings", "tree-shaking"],
-    sources: [
-      mdn("JavaScript modules", "Web/JavaScript/Guide/Modules"),
-      mdn("import", "Web/JavaScript/Reference/Statements/import"),
-      mdn("import()", "Web/JavaScript/Reference/Operators/import"),
-      spec("Modules", "sec-modules"),
-      { label: "Lin Clark: ES modules — a cartoon deep-dive", url: "https://hacks.mozilla.org/2018/03/es-modules-a-cartoon-deep-dive/", kind: "external" },
-      v8("JavaScript modules", "features/modules"),
-      { label: "Node.js: Modules — ECMAScript modules", url: "https://nodejs.org/api/esm.html", kind: "docs" },
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Use named and default exports/imports, namespaces and re-exports",
@@ -4730,10 +4401,7 @@ console.log(count);   // destructured copy of the value at require time`, output
     prerequisites: ["javascript/dom"],
     related: ["javascript/modules", "javascript/performance", "javascript/event-loop"],
     tags: ["script", "async", "defer", "module", "DOMContentLoaded", "preload"],
-    sources: [
-      mdn("<script> element", "Web/HTML/Element/script"),
-      { label: "HTML Standard: the script element", url: "https://html.spec.whatwg.org/multipage/scripting.html#the-script-element", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Explain why a classic `<script>` blocks parsing (it might `document.write`)",
       "Compare `async` (run as soon as downloaded, any order) and `defer` (run in order after parsing, before DOMContentLoaded)",
@@ -4759,12 +4427,7 @@ console.log(count);   // destructured copy of the value at require time`, output
     prerequisites: ["javascript/event-loop"],
     related: ["javascript/timers", "javascript/performance", "javascript/deep-copy", "nodejs/worker-threads"],
     tags: ["localStorage", "IndexedDB", "web-workers", "requestAnimationFrame", "postMessage"],
-    sources: [
-      mdn("Web Storage API", "Web/API/Web_Storage_API"),
-      mdn("IndexedDB API", "Web/API/IndexedDB_API"),
-      mdn("Using Web Workers", "Web/API/Web_Workers_API/Using_web_workers"),
-      mdn("requestAnimationFrame()", "Web/API/Window/requestAnimationFrame"),
-    ],
+    sources: [],
     objectives: [
       "Choose between cookies, localStorage, sessionStorage, IndexedDB and the Cache API (size, sync vs async, scope, security)",
       "Move CPU-heavy work to a Web Worker and communicate with `postMessage` (structured clone, transferables)",
@@ -4796,10 +4459,7 @@ const advanced: Lesson[] = [
     prerequisites: ["javascript/closures", "javascript/map-set"],
     related: ["javascript/weakmap-weakset", "javascript/recursion", "javascript/memory-leaks-gc", "react/memoization-hooks"],
     tags: ["memoization", "caching", "lru", "pure-functions"],
-    sources: [
-      mdn("Closures — practical closures", "Web/JavaScript/Guide/Closures#practical_closures"),
-      mdn("Map", "Web/JavaScript/Reference/Global_Objects/Map"),
-    ],
+    sources: [],
     objectives: [
       "Implement `memoize(fn, resolver)` with a Map in a closure",
       "Explain why only pure (deterministic, side-effect-free) functions should be memoized",
@@ -4828,14 +4488,7 @@ const advanced: Lesson[] = [
     prerequisites: ["javascript/closures", "javascript/timers", "javascript/this-binding"],
     related: ["javascript/event-loop", "javascript/storage-workers-raf", "javascript/performance", "javascript/higher-order-functions"],
     tags: ["debounce", "throttle", "rate-limiting", "timers", "closures", "events"],
-    sources: [
-      mdn("setTimeout()", "Web/API/Window/setTimeout"),
-      mdn("Debounce (glossary)", "Glossary/Debounce"),
-      mdn("Throttle (glossary)", "Glossary/Throttle"),
-      { label: "CSS-Tricks: Debouncing and Throttling Explained", url: "https://css-tricks.com/debouncing-throttling-explained-examples/", kind: "external" },
-      { label: "lodash: _.debounce docs", url: "https://lodash.com/docs/#debounce", kind: "docs", note: "Reference for leading/trailing/maxWait semantics." },
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain the difference between debounce and throttle with a timeline",
@@ -5009,14 +4662,7 @@ window.addEventListener("scroll", throttle(() => {
     prerequisites: ["javascript/data-types", "javascript/closures"],
     related: ["javascript/weakmap-weakset", "javascript/performance", "javascript/memoization", "javascript/event-delegation", "javascript/abortcontroller", "nodejs/v8-internals"],
     tags: ["garbage-collection", "memory-leaks", "mark-and-sweep", "generational-gc", "heap-snapshot", "v8", "orinoco"],
-    sources: [
-      mdn("Memory management", "Web/JavaScript/Guide/Memory_management"),
-      v8("Trash talk: the Orinoco garbage collector", "blog/trash-talk", "V8's generational, parallel, concurrent GC — engine detail."),
-      v8("Concurrent marking in V8", "blog/concurrent-marking"),
-      { label: "Chrome DevTools: Fix memory problems", url: "https://developer.chrome.com/docs/devtools/memory-problems", kind: "docs" },
-      { label: "Node.js: Using heap snapshots", url: "https://nodejs.org/en/learn/diagnostics/memory/using-heap-snapshot", kind: "docs" },
-      PRACTICE,
-    ],
+    sources: [],
     sections: [
       { id: "objectives", blocks: [{ type: "list", items: [
         "Explain the memory lifecycle (allocate, use, release) and reachability from roots",
@@ -5169,13 +4815,7 @@ table.innerHTML = "";           // ...so removed rows stay alive as 'detached' n
     prerequisites: ["javascript/event-loop", "javascript/memory-leaks-gc"],
     related: ["javascript/debounce-throttle", "javascript/dom-manipulation", "javascript/storage-workers-raf", "nodejs/jit-compilation", "nodejs/v8-internals"],
     tags: ["performance", "profiling", "long-tasks", "inp", "jit", "hidden-classes"],
-    sources: [
-      { label: "Chrome DevTools: Analyze runtime performance", url: "https://developer.chrome.com/docs/devtools/performance", kind: "docs" },
-      mdn("Performance API", "Web/API/Performance_API"),
-      { label: "web.dev: Optimize long tasks", url: "https://web.dev/articles/optimize-long-tasks", kind: "external" },
-      v8("Fast properties in V8", "blog/fast-properties"),
-      { label: "Node.js: Profiling Node.js applications", url: "https://nodejs.org/en/learn/getting-started/profiling", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Measure with `performance.now()`, User Timing marks and DevTools/`--cpu-prof` profiles before changing code",
       "Identify long tasks and improve responsiveness (INP) by yielding to the event loop",
@@ -5204,12 +4844,7 @@ table.innerHTML = "";           // ...so removed rows stay alive as 'detached' n
     prerequisites: ["javascript/classes-inheritance", "javascript/promises"],
     related: ["javascript/async-await", "javascript/call-stack", "javascript/callbacks"],
     tags: ["errors", "try-catch", "finally", "custom-errors", "error-cause", "unhandledrejection"],
-    sources: [
-      mdn("Error", "Web/JavaScript/Reference/Global_Objects/Error"),
-      mdn("try...catch", "Web/JavaScript/Reference/Statements/try...catch"),
-      mdn("Error: cause", "Web/JavaScript/Reference/Global_Objects/Error/cause"),
-      mdn("Window: unhandledrejection event", "Web/API/Window/unhandledrejection_event"),
-    ],
+    sources: [],
     objectives: [
       "Explain try/catch/finally control flow, including `return` inside `finally` overriding",
       "Use built-in types (TypeError, RangeError, SyntaxError, ReferenceError, AggregateError) meaningfully",
@@ -5236,10 +4871,7 @@ table.innerHTML = "";           // ...so removed rows stay alive as 'detached' n
     prerequisites: ["javascript/modules", "javascript/classes-inheritance"],
     related: ["javascript/getters-setters-static", "javascript/iife", "javascript/closures"],
     tags: ["singleton", "design-patterns", "modules"],
-    sources: [
-      mdn("JavaScript modules", "Web/JavaScript/Guide/Modules"),
-      { label: "patterns.dev: Singleton pattern", url: "https://www.patterns.dev/vanilla/singleton-pattern", kind: "external" },
-    ],
+    sources: [],
     objectives: [
       "Implement a singleton with a module export, a closure, and a class with a static instance",
       "Explain that ES modules are already singletons per resolved specifier (and when that breaks: duplicate packages, different URLs)",
@@ -5264,11 +4896,7 @@ table.innerHTML = "";           // ...so removed rows stay alive as 'detached' n
     prerequisites: ["javascript/classes-inheritance", "javascript/higher-order-functions"],
     related: ["javascript/proxy-reflect", "javascript/memoization", "typescript/generics"],
     tags: ["decorators", "tc39", "typescript", "metaprogramming"],
-    sources: [
-      { label: "TC39 proposal: Decorators", url: "https://github.com/tc39/proposal-decorators", kind: "docs" },
-      { label: "TypeScript 5.0 release notes: Decorators", url: "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators", kind: "docs" },
-      { label: "TypeScript handbook: Decorators (experimental/legacy)", url: "https://www.typescriptlang.org/docs/handbook/decorators.html", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Explain the decorator idea as higher-order functions applied to class elements",
       "Write a TC39-style method decorator `(value, context) => replacement` (e.g. `@logged`, `@bound`, `@memoize`)",
@@ -5294,11 +4922,7 @@ table.innerHTML = "";           // ...so removed rows stay alive as 'detached' n
     prerequisites: ["javascript/recursion", "javascript/call-stack"],
     related: ["javascript/generators-iterators"],
     tags: ["tail-calls", "ptc", "tco", "recursion", "trampoline"],
-    sources: [
-      spec("Tail Position Calls", "sec-tail-position-calls"),
-      v8("ES2015, ES2016, and beyond (tail calls status)", "blog/modern-javascript", "Explains why V8 did not ship proper tail calls."),
-      { label: "Compatibility table: proper tail calls", url: "https://compat-table.github.io/compat-table/es6/", kind: "external", note: "Shows PTC supported only in Safari/JavaScriptCore." },
-    ],
+    sources: [],
     objectives: [
       "Define a tail call (the call is the last action; its result is returned directly)",
       "Know the support reality: spec'd for strict mode in ES2015, implemented only in JavaScriptCore (Safari); not in V8 (Chrome/Node) or SpiderMonkey (Firefox)",
@@ -5323,12 +4947,7 @@ table.innerHTML = "";           // ...so removed rows stay alive as 'detached' n
     prerequisites: ["javascript/modules"],
     related: ["javascript/script-loading", "javascript/performance", "production/build-performance", "production/monorepos-turborepo"],
     tags: ["bundlers", "transpilation", "babel", "vite", "webpack", "tree-shaking", "source-maps"],
-    sources: [
-      mdn("JavaScript modules — other differences / bundlers", "Web/JavaScript/Guide/Modules"),
-      { label: "Vite: Why Vite", url: "https://vite.dev/guide/why.html", kind: "docs" },
-      { label: "Node.js: Package entry points (exports)", url: "https://nodejs.org/api/packages.html#package-entry-points", kind: "docs" },
-      { label: "webpack: Tree shaking", url: "https://webpack.js.org/guides/tree-shaking/", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Distinguish transpiling syntax from polyfilling APIs (and browserslist targets)",
       "Explain what a bundler does: resolve, transform, link the graph, tree-shake, split chunks, emit with hashes",
@@ -5354,12 +4973,7 @@ table.innerHTML = "";           // ...so removed rows stay alive as 'detached' n
     prerequisites: ["javascript/modules", "javascript/async-await"],
     related: ["javascript/debounce-throttle", "javascript/error-handling", "production/git-workflows"],
     tags: ["testing", "vitest", "jest", "eslint", "prettier", "conventions"],
-    sources: [
-      { label: "Vitest documentation", url: "https://vitest.dev/guide/", kind: "docs" },
-      { label: "ESLint: Rules reference", url: "https://eslint.org/docs/latest/rules/", kind: "docs" },
-      { label: "Prettier: Rationale", url: "https://prettier.io/docs/rationale", kind: "docs" },
-      { label: "Node.js test runner", url: "https://nodejs.org/api/test.html", kind: "docs" },
-    ],
+    sources: [],
     objectives: [
       "Write unit tests (arrange/act/assert) for pure functions and async code",
       "Use fake timers, spies and module mocks judiciously",

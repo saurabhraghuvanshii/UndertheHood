@@ -125,6 +125,22 @@ describe("design exercises", () => {
   });
 });
 
+describe("source policy", () => {
+  it("JavaScript and Go cite only the lydiahallie/javascript-questions repo", () => {
+    const jsGo = new Set(["javascript", "go"]);
+    const refs = [
+      ...tracks.filter((t) => jsGo.has(t.slug)).flatMap((t) => t.sources),
+      ...lessons.filter((l) => jsGo.has(l.track)).flatMap((l) => l.sources),
+      ...questions.filter((q) => jsGo.has(q.track)).flatMap((q) => q.sources ?? []),
+    ];
+    expect(refs.filter((r) => !r.url?.includes("github.com/lydiahallie/javascript-questions"))).toEqual([]);
+  });
+
+  it("no Notion links anywhere", () => {
+    expect(JSON.stringify([tracks, lessons, questions, designExercises])).not.toMatch(/notion\.(so|com)/);
+  });
+});
+
 describe("blocks", () => {
   it("every embedded visualization exists", () => {
     const ids = allBlocks().filter((b): b is Extract<Block, { type: "viz" }> => b.type === "viz").map((b) => b.id);

@@ -4,7 +4,6 @@ import type { Track } from "../types";
  * Go track structure. Lessons live in `go-fundamentals.ts` (fundamentals, runtime & memory)
  * and `go-concurrency.ts` (concurrency & production).
  */
-const notion = (label: string, url: string) => ({ label, url, kind: "inaccessible" as const, note: "Learner's private Notion page — not publicly readable, so nothing was imported from it." });
 
 export const track: Track = {
   slug: "go",
@@ -91,16 +90,5 @@ export const track: Track = {
       exercises: ["go/mutex", "go/http-server", "system-design/rate-limiting"],
     },
   ],
-  sources: [
-    { label: "The Go Programming Language Specification", url: "https://go.dev/ref/spec", kind: "docs" },
-    { label: "Effective Go", url: "https://go.dev/doc/effective_go", kind: "docs" },
-    { label: "The Go Memory Model", url: "https://go.dev/ref/mem", kind: "docs" },
-    { label: "A Guide to the Go Garbage Collector", url: "https://go.dev/doc/gc-guide", kind: "docs" },
-    { label: "Practical Go Lessons (book)", url: "https://www.practical-go-lessons.com/", kind: "external", note: "Recommended companion reading supplied by the learner." },
-    { label: "Learner's Go practice code (language-learning/Go)", url: "https://github.com/saurabhraghuvanshii/language-learning/tree/main/Go", kind: "original-note" },
-    notion("Notion: Installation", "https://app.notion.com/p/Installation-1a2e9488b51a810a8424c1c5b4bafc77?pvs=21"),
-    notion("Notion: Goroutines", "https://app.notion.com/p/Goroutines-1a2e9488b51a816da0b5d42463eeff5f?pvs=21"),
-    notion("Notion: Channels — buffered vs unbuffered, defers", "https://app.notion.com/p/Channels-Buffered-vs-Unbuffered-defers-1a2e9488b51a81baa5f6f8568198f14b?pvs=21"),
-    notion("Notion: Worker pool pattern", "https://app.notion.com/p/Worker-pool-pattern-1a2e9488b51a8130a3f6c09175ea85d3?pvs=21"),
-  ],
+  sources: [],
 };

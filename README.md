@@ -95,10 +95,11 @@ target date instead of silently cramming. Missed tasks can be rescheduled forwar
 
 ## Sources and attribution
 
-- Learner sources are recorded per lesson with a kind: *Your notes*, *Docs*, *External*, or *Not accessible*.
-- The supplied Notion pages are private and the ChatGPT conversation link requires login; they are listed as
-  "Not accessible" and **nothing was imported or paraphrased from them**. practical-go-lessons.com is linked as
-  companion reading only.
+- JavaScript and Go content cite only the
+  [lydiahallie/javascript-questions](https://github.com/lydiahallie/javascript-questions) repository; other tracks
+  list their documentation sources per lesson.
+- The supplied Notion pages are private and the ChatGPT conversation link requires login, so **nothing was imported
+  or paraphrased from them** and they are not linked on the site.
 - `content-sources/Js-questions-lydiahallie.md` comes from the learner's
   [language-learning](https://github.com/saurabhraghuvanshii/language-learning) repo; original work © Lydia Hallie,
   MIT License (`content-sources/LICENSE-lydiahallie-javascript-questions`).

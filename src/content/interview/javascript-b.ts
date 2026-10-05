@@ -1,22 +1,10 @@
-import type { InterviewQuestion, SourceRef } from "../types";
+import type { InterviewQuestion } from "../types";
 
 /**
  * JavaScript interview questions 27–52 (ranked by interview frequency in the
  * learner's original list). Items 1–26 live in `javascript-a.ts`.
  * Overlapping topics are kept on purpose and cross-linked via `relatedQuestions`.
  */
-
-const listSource = (n: number): SourceRef => ({
-  label: `Learner's JavaScript interview list (item ${n}, topic only)`,
-  kind: "original-note",
-  note: "Only the topic was supplied; the question wording here is an interviewer-style phrasing.",
-});
-
-const mdn = (path: string, label: string): SourceRef => ({
-  label: `MDN: ${label}`,
-  url: `https://developer.mozilla.org/en-US/docs/${path}`,
-  kind: "docs",
-});
 
 export const questions: InterviewQuestion[] = [
   // ───────────────────────────────────────────────────────────── 27
@@ -105,12 +93,7 @@ console.log(sumAll(1)(2)(3));`,
     ],
     relatedLessons: ["javascript/currying", "javascript/closures", "javascript/higher-order-functions"],
     relatedQuestions: ["js-02", "js-08", "js-26", "js-36"],
-    sources: [
-      listSource(27),
-      mdn("Web/JavaScript/Reference/Global_Objects/Function/length", "Function.prototype.length"),
-      { label: "javascript.info: Currying", url: "https://javascript.info/currying-partials", kind: "external" },
-      { label: "Lodash: _.curry", url: "https://lodash.com/docs/#curry", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 28
@@ -206,13 +189,7 @@ undefined true
     ],
     relatedLessons: ["javascript/generators-iterators", "javascript/async-iteration", "javascript/async-await"],
     relatedQuestions: ["js-45", "js-44", "js-07", "js-19"],
-    sources: [
-      listSource(28),
-      mdn("Web/JavaScript/Reference/Statements/function*", "function*"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Generator", "Generator"),
-      mdn("Web/JavaScript/Reference/Operators/yield*", "yield*"),
-      { label: "ECMAScript spec: Generator Objects", url: "https://tc39.es/ecma262/#sec-generator-objects", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 29
@@ -307,12 +284,7 @@ TypeError`,
     ],
     relatedLessons: ["javascript/arrow-functions", "javascript/this-binding", "javascript/call-apply-bind"],
     relatedQuestions: ["js-03", "js-16", "js-23", "js-49"],
-    sources: [
-      listSource(29),
-      mdn("Web/JavaScript/Reference/Functions/Arrow_functions", "Arrow function expressions"),
-      mdn("Web/JavaScript/Reference/Operators/this", "this"),
-      { label: "ECMAScript spec: OrdinaryCallBindThis (lexical this mode)", url: "https://tc39.es/ecma262/#sec-ordinarycallbindthis", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────────────────────── 30
   {
@@ -409,12 +381,7 @@ TypeError
     ],
     relatedLessons: ["javascript/symbols", "javascript/generators-iterators", "javascript/data-types"],
     relatedQuestions: ["js-12", "js-45", "js-39"],
-    sources: [
-      listSource(30),
-      mdn("Web/JavaScript/Reference/Global_Objects/Symbol", "Symbol"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Symbol/toPrimitive", "Symbol.toPrimitive"),
-      { label: "TC39 proposal: Symbols as WeakMap keys (ES2023)", url: "https://github.com/tc39/proposal-symbols-as-weakmap-keys", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 31
@@ -515,13 +482,7 @@ TypeError`,
     ],
     relatedLessons: ["javascript/classes-inheritance", "javascript/prototypes", "javascript/mixins"],
     relatedQuestions: ["js-04", "js-47", "js-46"],
-    sources: [
-      listSource(31),
-      mdn("Web/JavaScript/Reference/Classes", "Classes"),
-      mdn("Web/JavaScript/Reference/Classes/extends", "extends"),
-      mdn("Web/JavaScript/Reference/Operators/super", "super"),
-      mdn("Web/JavaScript/Reference/Classes/Private_properties", "Private properties"),
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 32
@@ -619,13 +580,7 @@ fixed listeners: 0`,
     ],
     relatedLessons: ["javascript/memory-leaks-gc", "javascript/weakmap-weakset", "javascript/closures", "javascript/timers"],
     relatedQuestions: ["js-39", "js-02", "js-38", "js-20"],
-    sources: [
-      listSource(32),
-      mdn("Web/JavaScript/Memory_management", "Memory management"),
-      { label: "Chrome DevTools: Fix memory problems", url: "https://developer.chrome.com/docs/devtools/memory-problems", kind: "docs" },
-      { label: "V8 blog: Trash talk — the Orinoco garbage collector", url: "https://v8.dev/blog/trash-talk", kind: "external" },
-      mdn("Web/API/EventTarget/addEventListener", "addEventListener (signal option)"),
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 33
@@ -723,13 +678,7 @@ TypeError`,
     ],
     relatedLessons: ["javascript/proxy-reflect", "javascript/prototypes", "javascript/freeze-seal"],
     relatedQuestions: ["js-37", "js-35", "js-43"],
-    sources: [
-      listSource(33),
-      mdn("Web/JavaScript/Reference/Global_Objects/Proxy", "Proxy"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Proxy/Proxy", "Proxy() handler traps"),
-      { label: "ECMAScript spec: Proxy object internal methods", url: "https://tc39.es/ecma262/#sec-proxy-object-internal-methods-and-internal-slots", kind: "docs" },
-      { label: "Vue docs: Reactivity in depth", url: "https://vuejs.org/guide/extras/reactivity-in-depth.html", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 34
@@ -843,14 +792,7 @@ caught: async boom`,
     ],
     relatedLessons: ["javascript/error-handling", "javascript/promises", "javascript/async-await", "javascript/call-stack"],
     relatedQuestions: ["js-24", "js-09", "js-07", "js-41"],
-    sources: [
-      listSource(34),
-      mdn("Web/JavaScript/Reference/Statements/throw", "throw"),
-      mdn("Web/JavaScript/Reference/Statements/try...catch", "try...catch"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Error", "Error"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Error/cause", "Error: cause"),
-      { label: "Node.js CLI: --unhandled-rejections", url: "https://nodejs.org/api/cli.html#--unhandled-rejectionsmode", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────────────────────── 35
   {
@@ -943,12 +885,7 @@ localhost 1`,
     ],
     relatedLessons: ["javascript/freeze-seal", "javascript/var-let-const", "javascript/deep-copy"],
     relatedQuestions: ["js-51", "js-06", "js-18"],
-    sources: [
-      listSource(35),
-      mdn("Web/JavaScript/Reference/Global_Objects/Object/freeze", "Object.freeze()"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Object/isFrozen", "Object.isFrozen()"),
-      { label: "ECMAScript spec: SetIntegrityLevel", url: "https://tc39.es/ecma262/#sec-setintegritylevel", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 36
@@ -1037,12 +974,7 @@ calls: 2
     ],
     relatedLessons: ["javascript/memoization", "javascript/closures", "javascript/higher-order-functions", "react/memoization-hooks"],
     relatedQuestions: ["js-02", "js-26", "js-27", "js-08", "js-39"],
-    sources: [
-      listSource(36),
-      mdn("Web/JavaScript/Reference/Global_Objects/Map", "Map"),
-      { label: "javascript.info: Decorators and forwarding (caching decorator)", url: "https://javascript.info/call-apply-decorators", kind: "external" },
-      { label: "React docs: useMemo", url: "https://react.dev/reference/react/useMemo", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 37
@@ -1126,12 +1058,7 @@ child
     ],
     relatedLessons: ["javascript/proxy-reflect", "javascript/prototypes"],
     relatedQuestions: ["js-33", "js-49", "js-31"],
-    sources: [
-      listSource(37),
-      mdn("Web/JavaScript/Reference/Global_Objects/Reflect", "Reflect"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Reflect/Comparing_Reflect_and_Object_methods", "Comparing Reflect and Object methods"),
-      { label: "ECMAScript spec: The Reflect Object", url: "https://tc39.es/ecma262/#sec-reflect-object", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 38
@@ -1220,14 +1147,7 @@ console.log('main thread is free between chunks');`,
     ],
     relatedLessons: ["javascript/performance", "javascript/debounce-throttle", "javascript/event-loop", "javascript/script-loading", "javascript/memory-leaks-gc"],
     relatedQuestions: ["js-21", "js-36", "js-32", "js-48", "js-01", "js-22"],
-    sources: [
-      listSource(38),
-      { label: "web.dev: Web Vitals", url: "https://web.dev/articles/vitals", kind: "docs" },
-      { label: "web.dev: Optimize long tasks", url: "https://web.dev/articles/optimize-long-tasks", kind: "docs" },
-      { label: "web.dev: Interaction to Next Paint (INP)", url: "https://web.dev/articles/inp", kind: "docs" },
-      mdn("Web/Performance", "Web performance"),
-      { label: "V8 blog: Fast properties in V8", url: "https://v8.dev/blog/fast-properties", kind: "external" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 39
@@ -1316,13 +1236,7 @@ undefined undefined`,
     ],
     relatedLessons: ["javascript/weakmap-weakset", "javascript/memory-leaks-gc", "javascript/symbols"],
     relatedQuestions: ["js-32", "js-52", "js-30", "js-36"],
-    sources: [
-      listSource(39),
-      mdn("Web/JavaScript/Reference/Global_Objects/WeakMap", "WeakMap"),
-      mdn("Web/JavaScript/Reference/Global_Objects/WeakSet", "WeakSet"),
-      mdn("Web/JavaScript/Reference/Global_Objects/WeakRef", "WeakRef"),
-      { label: "TC39 proposal: Symbols as WeakMap keys (ES2023)", url: "https://github.com/tc39/proposal-symbols-as-weakmap-keys", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 40
@@ -1411,14 +1325,7 @@ hi`,
     ],
     relatedLessons: ["javascript/modules", "javascript/script-loading", "javascript/singleton"],
     relatedQuestions: ["js-17", "js-46", "js-48"],
-    sources: [
-      listSource(40),
-      mdn("Web/JavaScript/Guide/Modules", "JavaScript modules"),
-      mdn("Web/JavaScript/Reference/Statements/import", "import"),
-      mdn("Web/JavaScript/Reference/Statements/export", "export"),
-      { label: "Node.js docs: ECMAScript modules", url: "https://nodejs.org/api/esm.html", kind: "docs" },
-      { label: "Node.js docs: Loading ECMAScript modules using require()", url: "https://nodejs.org/api/modules.html#loading-ecmascript-modules-using-require", kind: "docs" },
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────────────────────── 41
   {
@@ -1503,13 +1410,7 @@ settled slow`,
     ],
     relatedLessons: ["javascript/promise-combinators", "javascript/promises", "javascript/async-await", "javascript/event-loop"],
     relatedQuestions: ["js-09", "js-07", "js-11", "js-34"],
-    sources: [
-      listSource(41),
-      mdn("Web/JavaScript/Reference/Global_Objects/Promise/all", "Promise.all()"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Promise/allSettled", "Promise.allSettled()"),
-      mdn("Web/API/AbortController", "AbortController"),
-      { label: "ECMAScript spec: Promise.all", url: "https://tc39.es/ecma262/#sec-promise.all", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 42
@@ -1597,13 +1498,7 @@ console.log(sumToT(1e6));`,
     ],
     relatedLessons: ["javascript/tail-calls", "javascript/call-stack", "dsa/recursion"],
     relatedQuestions: ["js-50", "js-34"],
-    sources: [
-      listSource(42),
-      { label: "ECMAScript spec: Tail Position Calls", url: "https://tc39.es/ecma262/#sec-tail-position-calls", kind: "docs" },
-      { label: "WebKit blog: ECMAScript 6 Proper Tail Calls in WebKit", url: "https://webkit.org/blog/6240/ecmascript-6-proper-tail-calls-in-webkit/", kind: "external" },
-      { label: "TC39 proposal: Syntactic Tail Calls (inactive)", url: "https://github.com/tc39/proposal-ptc-syntax", kind: "docs" },
-      { label: "ECMAScript compatibility table (ES6 → proper tail calls)", url: "https://compat-table.github.io/compat-table/es6/", kind: "external" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 43
@@ -1707,14 +1602,7 @@ console.log(getBase());`,
     ],
     relatedLessons: ["javascript/decorators", "javascript/classes-inheritance", "javascript/higher-order-functions", "typescript/generics"],
     relatedQuestions: ["js-31", "js-36", "js-08", "js-33"],
-    sources: [
-      listSource(43),
-      { label: "TC39 proposal: Decorators", url: "https://github.com/tc39/proposal-decorators", kind: "docs" },
-      { label: "TC39 proposal: Decorator Metadata", url: "https://github.com/tc39/proposal-decorator-metadata", kind: "docs" },
-      { label: "TypeScript 5.0 release notes: Decorators", url: "https://www.typescriptlang.org/docs/handbook/release-notes/typescript-5-0.html#decorators", kind: "docs" },
-      { label: "TypeScript handbook: Decorators (legacy experimentalDecorators)", url: "https://www.typescriptlang.org/docs/handbook/decorators.html", kind: "docs" },
-      { label: "Babel: @babel/plugin-proposal-decorators", url: "https://babeljs.io/docs/babel-plugin-proposal-decorators", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 44
@@ -1809,13 +1697,7 @@ ticks cleaned up
     ],
     relatedLessons: ["javascript/async-iteration", "javascript/generators-iterators", "javascript/async-await", "nodejs/streams-buffers"],
     relatedQuestions: ["js-28", "js-45", "js-07", "js-41"],
-    sources: [
-      listSource(44),
-      mdn("Web/JavaScript/Reference/Statements/for-await...of", "for await...of"),
-      mdn("Web/JavaScript/Reference/Statements/async_function*", "async function*"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Symbol/asyncIterator", "Symbol.asyncIterator"),
-      { label: "TC39 proposal: Asynchronous Iteration (ES2018)", url: "https://github.com/tc39/proposal-async-iteration", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 45
@@ -1911,13 +1793,7 @@ TypeError`,
     ],
     relatedLessons: ["javascript/generators-iterators", "javascript/symbols", "javascript/async-iteration"],
     relatedQuestions: ["js-28", "js-44", "js-30", "js-19"],
-    sources: [
-      listSource(45),
-      mdn("Web/JavaScript/Reference/Iteration_protocols", "Iteration protocols"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Symbol/iterator", "Symbol.iterator"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Iterator", "Iterator (and iterator helpers)"),
-      { label: "ECMAScript spec: IteratorClose", url: "https://tc39.es/ecma262/#sec-iteratorclose", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 46
@@ -2011,12 +1887,7 @@ true connects: 1`,
     ],
     relatedLessons: ["javascript/singleton", "javascript/modules", "javascript/classes-inheritance", "javascript/closures"],
     relatedQuestions: ["js-40", "js-17", "js-31", "js-02"],
-    sources: [
-      listSource(46),
-      { label: "patterns.dev: Singleton pattern", url: "https://www.patterns.dev/vanilla/singleton-pattern", kind: "external" },
-      mdn("Web/JavaScript/Guide/Modules", "JavaScript modules"),
-      mdn("Web/JavaScript/Reference/Classes/static", "static"),
-    ],
+    sources: [],
   },
   // ───────────────────────────────────────────────────────────── 47
   {
@@ -2099,12 +1970,7 @@ true function`,
     ],
     relatedLessons: ["javascript/mixins", "javascript/classes-inheritance", "javascript/prototypes"],
     relatedQuestions: ["js-31", "js-04", "js-43"],
-    sources: [
-      listSource(47),
-      { label: "MDN: extends — Mix-ins", url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes/extends#mix-ins", kind: "docs" },
-      { label: "javascript.info: Mixins", url: "https://javascript.info/mixins", kind: "external" },
-      { label: "TypeScript handbook: Mixins", url: "https://www.typescriptlang.org/docs/handbook/mixins.html", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 48
@@ -2186,12 +2052,7 @@ DOMContentLoaded
     ],
     relatedLessons: ["javascript/script-loading", "javascript/performance", "javascript/modules", "javascript/dom"],
     relatedQuestions: ["js-38", "js-40", "js-17", "js-01"],
-    sources: [
-      listSource(48),
-      mdn("Web/HTML/Reference/Elements/script", "<script>: The Script element"),
-      { label: "HTML Standard: script element (async/defer)", url: "https://html.spec.whatwg.org/multipage/scripting.html#attr-script-async", kind: "docs" },
-      { label: "javascript.info: Scripts — async, defer", url: "https://javascript.info/script-async-defer", kind: "external" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 49
@@ -2285,12 +2146,7 @@ Hey, Bound.
     ],
     relatedLessons: ["javascript/call-apply-bind", "javascript/this-binding", "javascript/arrow-functions"],
     relatedQuestions: ["js-23", "js-03", "js-29", "js-37"],
-    sources: [
-      listSource(49),
-      mdn("Web/JavaScript/Reference/Global_Objects/Function/call", "Function.prototype.call()"),
-      { label: "ECMAScript spec: Function.prototype.call", url: "https://tc39.es/ecma262/#sec-function.prototype.call", kind: "docs" },
-      { label: "ECMAScript spec: OrdinaryCallBindThis", url: "https://tc39.es/ecma262/#sec-ordinarycallbindthis", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 50
@@ -2387,12 +2243,7 @@ RangeError: stack underflow`,
     ],
     relatedLessons: ["javascript/call-stack", "dsa/stacks-queues", "dsa/recursion"],
     relatedQuestions: ["js-42", "js-01"],
-    sources: [
-      listSource(50),
-      mdn("Web/JavaScript/Reference/Global_Objects/Array/push", "Array.prototype.push()"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Array/pop", "Array.prototype.pop()"),
-      mdn("Glossary/Call_stack", "Call stack"),
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 51
@@ -2483,13 +2334,7 @@ true`,
     ],
     relatedLessons: ["javascript/freeze-seal"],
     relatedQuestions: ["js-35", "js-33", "js-37"],
-    sources: [
-      listSource(51),
-      mdn("Web/JavaScript/Reference/Global_Objects/Object/seal", "Object.seal()"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Object/freeze", "Object.freeze()"),
-      mdn("Web/JavaScript/Reference/Global_Objects/Object/preventExtensions", "Object.preventExtensions()"),
-      { label: "ECMAScript spec: SetIntegrityLevel", url: "https://tc39.es/ecma262/#sec-setintegritylevel", kind: "docs" },
-    ],
+    sources: [],
   },
 
   // ───────────────────────────────────────────────────────────── 52
@@ -2598,13 +2443,6 @@ true true`,
     ],
     relatedLessons: ["javascript/json-circular", "javascript/deep-copy", "javascript/weakmap-weakset", "backend/serialization"],
     relatedQuestions: ["js-18", "js-39", "js-32"],
-    sources: [
-      listSource(52),
-      mdn("Web/JavaScript/Reference/Global_Objects/JSON/stringify", "JSON.stringify()"),
-      mdn("Web/JavaScript/Reference/Errors/Cyclic_object_value", "TypeError: cyclic object value"),
-      mdn("Web/API/Window/structuredClone", "structuredClone()"),
-      { label: "ECMAScript spec: SerializeJSONObject", url: "https://tc39.es/ecma262/#sec-serializejsonobject", kind: "docs" },
-      { label: "flatted (npm): circular JSON parser", url: "https://github.com/WebReflection/flatted", kind: "external" },
-    ],
+    sources: [],
   },
 ];

@@ -111,10 +111,12 @@ export default async function TrackPage({ params }: PageProps<"/paths/[track]">)
               {track.milestones.length > 0 && <li><a href="#milestones" className="text-muted hover:text-fg">Project milestones</a></li>}
             </ol>
           </div>
-          <div>
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">Sources</p>
-            <Sources sources={track.sources} />
-          </div>
+          {track.sources.length > 0 && (
+            <div>
+              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">Sources</p>
+              <Sources sources={track.sources} />
+            </div>
+          )}
           <Badge>{all.filter((l) => l.status === "authored").length} written · {all.filter((l) => l.status === "outline").length} outline</Badge>
         </aside>
       </div>

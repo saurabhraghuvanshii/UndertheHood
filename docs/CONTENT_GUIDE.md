@@ -31,8 +31,10 @@ Each authored lesson teaches **What, Why, How (internals), Visualize, Interview*
 - Code examples must be correct and actually produce the stated `output`. Use `runnable: true` only
   for JavaScript snippets that run in a plain Web Worker (no DOM, no `require`, no network) and print via `console.log`.
 - Don't reproduce copyrighted text. Write original explanations; link to docs in `sources`.
-- Never claim to have read a source you couldn't read. Supplied-but-private sources (Notion pages,
-  ChatGPT conversations) go in `sources` with `kind: "inaccessible"`.
+- Never claim to have read a source you couldn't read, and don't link private sources (Notion pages,
+  ChatGPT conversations) on the site.
+- **Source policy:** JavaScript and Go lessons/questions list no references except the
+  lydiahallie/javascript-questions repo (where relevant). Other tracks may cite documentation.
 - Keep sections proportional: a trivial topic may only need objectives, intuition, definition,
   examples, mistakes, interview-short and summary.
 

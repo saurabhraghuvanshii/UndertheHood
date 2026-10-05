@@ -1,32 +1,10 @@
-import type { Lesson, SourceRef } from "../types";
+import type { Lesson } from "../types";
 
 /**
  * Go track — modules "go-fundamentals" and "go-runtime-memory".
  * Every Go snippet with an `output` was compiled and run (Go 1.26, linux/amd64);
  * outputs that depend on the runtime version are called out as such.
  */
-
-const notion = (label: string, url: string): SourceRef => ({
-  label,
-  url,
-  kind: "inaccessible",
-  note: "Private Notion page — not readable, nothing imported.",
-});
-
-const practiceRepo: SourceRef = {
-  label: "Learner's Go practice code (language-learning/Go)",
-  url: "https://github.com/saurabhraghuvanshii/language-learning/tree/main/Go",
-  kind: "original-note",
-};
-
-const pgl: SourceRef = {
-  label: "Practical Go Lessons (book)",
-  url: "https://www.practical-go-lessons.com/",
-  kind: "external",
-  note: "Companion reading suggested by the learner.",
-};
-
-const tour: SourceRef = { label: "A Tour of Go", url: "https://go.dev/tour/", kind: "docs" };
 
 export const lessons: Lesson[] = [
   // ───────────────────────────────────────────────────────────── why-go
@@ -44,14 +22,7 @@ export const lessons: Lesson[] = [
     prerequisites: [],
     related: ["nodejs/node-event-loop", "nodejs/v8-internals", "go/goroutines", "go/gmp-scheduler", "go/garbage-collection"],
     tags: ["go", "javascript", "nodejs", "runtime", "concurrency", "comparison"],
-    sources: [
-      { label: "Go FAQ — Why did you create a new language?", url: "https://go.dev/doc/faq#creating_a_new_language", kind: "docs" },
-      { label: "Go at Google: Language Design in the Service of Software Engineering", url: "https://go.dev/talks/2012/splash.article", kind: "docs" },
-      { label: "Node.js — The Node.js Event Loop", url: "https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick", kind: "docs" },
-      { label: "A Guide to the Go Garbage Collector", url: "https://go.dev/doc/gc-guide", kind: "docs" },
-      pgl,
-      practiceRepo,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -299,14 +270,7 @@ func main() {
     prerequisites: [],
     related: ["go/tooling-gofmt", "go/packages-modules"],
     tags: ["go", "setup", "toolchain"],
-    sources: [
-      { label: "Download and install Go", url: "https://go.dev/doc/install", kind: "docs" },
-      { label: "Tutorial: Get started with Go", url: "https://go.dev/doc/tutorial/getting-started", kind: "docs" },
-      { label: "Go Toolchains", url: "https://go.dev/doc/toolchain", kind: "docs" },
-      notion("Notion: Installation", "https://app.notion.com/p/Installation-1a2e9488b51a810a8424c1c5b4bafc77"),
-      notion("Notion: Hello World", "https://app.notion.com/p/Hello-world-1a2e9488b51a81c9840bc9b65c082411"),
-      practiceRepo,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -401,13 +365,7 @@ go install example.com/tool@latest                   # build a tool into $GOPATH
     prerequisites: ["go/installation-hello-world"],
     related: ["go/benchmarking-testing", "go/race-detector", "go/profiling-pprof"],
     tags: ["go", "tooling", "gofmt", "vet"],
-    sources: [
-      { label: "gofmt command", url: "https://pkg.go.dev/cmd/gofmt", kind: "docs" },
-      { label: "go vet command", url: "https://pkg.go.dev/cmd/vet", kind: "docs" },
-      { label: "The go command", url: "https://pkg.go.dev/cmd/go", kind: "docs" },
-      { label: "go fmt your code (Go blog)", url: "https://go.dev/blog/gofmt", kind: "docs" },
-      notion("Notion: Automatic formatting", "https://app.notion.com/p/Automatic-formatting-1a2e9488b51a81438f3ef30e065ba9c5"),
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -470,14 +428,7 @@ go install example.com/tool@latest                   # build a tool into $GOPATH
     prerequisites: ["go/installation-hello-world"],
     related: ["go/external-modules", "go/tooling-gofmt"],
     tags: ["go", "packages", "modules", "visibility", "init"],
-    sources: [
-      { label: "How to Write Go Code", url: "https://go.dev/doc/code", kind: "docs" },
-      { label: "Go Modules Reference", url: "https://go.dev/ref/mod", kind: "docs" },
-      { label: "Spec — Package initialization", url: "https://go.dev/ref/spec#Package_initialization", kind: "docs" },
-      notion("Notion: Using packages", "https://app.notion.com/p/Using-packages-1a2e9488b51a819f8d20c3aff0dbca60"),
-      notion("Notion: Modules in Go", "https://app.notion.com/p/Modules-in-go-1a2e9488b51a814088f9c7d72140de4f"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -584,14 +535,7 @@ func format(v int64) string { return fmt.Sprintf("$%d.%02d", v/100, v%100) }`,
     prerequisites: ["go/installation-hello-world"],
     related: ["go/enums-iota", "go/control-flow", "go/pointers"],
     tags: ["go", "variables", "constants", "types", "zero-value"],
-    sources: [
-      { label: "Spec — Constants", url: "https://go.dev/ref/spec#Constants", kind: "docs" },
-      { label: "Spec — The zero value", url: "https://go.dev/ref/spec#The_zero_value", kind: "docs" },
-      { label: "Constants (Go blog)", url: "https://go.dev/blog/constants", kind: "docs" },
-      notion("Notion: Variables and Constants", "https://app.notion.com/p/Variables-and-Constants-1a2e9488b51a81b9a749f507afdfc1e5"),
-      practiceRepo,
-      tour,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -694,13 +638,7 @@ int float64
     prerequisites: ["go/variables-constants"],
     related: ["go/functions", "go/goroutines", "go/defer"],
     tags: ["go", "for", "switch", "range", "loopvar"],
-    sources: [
-      { label: "Spec — Statements", url: "https://go.dev/ref/spec#Statements", kind: "docs" },
-      { label: "Fixing For Loops in Go 1.22 (Go blog)", url: "https://go.dev/blog/loopvar-preview", kind: "docs" },
-      { label: "Go 1.22 release notes", url: "https://go.dev/doc/go1.22", kind: "docs" },
-      notion("Notion: Loops, if-else, switch", "https://app.notion.com/p/Loops-if-else-switch-1a2e9488b51a818a8eddd08ff8f0e712"),
-      practiceRepo,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -893,12 +831,7 @@ for _, f := range fs {
     prerequisites: ["go/variables-constants"],
     related: ["go/slices-internals", "go/pointers"],
     tags: ["go", "arrays", "value-semantics"],
-    sources: [
-      { label: "Spec — Array types", url: "https://go.dev/ref/spec#Array_types", kind: "docs" },
-      { label: "Go Slices: usage and internals (Go blog)", url: "https://go.dev/blog/slices-intro", kind: "docs" },
-      notion("Notion: Arrays, slices and maps", "https://app.notion.com/p/Arrays-slices-and-maps-1a2e9488b51a81ecbb1de20901e6dd51"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -1001,15 +934,7 @@ func main() {
     prerequisites: ["go/arrays"],
     related: ["go/maps", "go/escape-analysis", "go/garbage-collection", "go/pointers"],
     tags: ["go", "slices", "append", "capacity", "aliasing", "memory"],
-    sources: [
-      { label: "Go Slices: usage and internals (Go blog)", url: "https://go.dev/blog/slices-intro", kind: "docs" },
-      { label: "Arrays, slices (and strings): The mechanics of 'append' (Go blog)", url: "https://go.dev/blog/slices", kind: "docs" },
-      { label: "Spec — Slice expressions", url: "https://go.dev/ref/spec#Slice_expressions", kind: "docs" },
-      { label: "runtime/slice.go (growslice, nextslicecap)", url: "https://github.com/golang/go/blob/master/src/runtime/slice.go", kind: "docs" },
-      { label: "Package slices", url: "https://pkg.go.dev/slices", kind: "docs" },
-      notion("Notion: Arrays, slices and maps", "https://app.notion.com/p/Arrays-slices-and-maps-1a2e9488b51a81ecbb1de20901e6dd51"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -1368,15 +1293,7 @@ fmt.Println(b[3], c[3])` },
     prerequisites: ["go/slices-internals"],
     related: ["go/mutex", "go/structs-methods", "dsa/hash-tables", "go/race-detector"],
     tags: ["go", "maps", "hash-table", "swiss-table", "concurrency"],
-    sources: [
-      { label: "Go maps in action (Go blog)", url: "https://go.dev/blog/maps", kind: "docs" },
-      { label: "Faster Go maps with Swiss Tables (Go blog)", url: "https://go.dev/blog/swisstable", kind: "docs" },
-      { label: "Spec — Map types", url: "https://go.dev/ref/spec#Map_types", kind: "docs" },
-      { label: "Go 1.24 release notes", url: "https://go.dev/doc/go1.24", kind: "docs" },
-      { label: "Package maps", url: "https://pkg.go.dev/maps", kind: "docs" },
-      notion("Notion: Arrays, slices and maps", "https://app.notion.com/p/Arrays-slices-and-maps-1a2e9488b51a81ecbb1de20901e6dd51"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -1630,14 +1547,7 @@ m["a"] = 1` },
     prerequisites: ["go/variables-constants", "go/control-flow"],
     related: ["go/errors", "go/defer", "go/escape-analysis", "javascript/closures", "go/pointers"],
     tags: ["go", "functions", "closures", "variadic", "first-class"],
-    sources: [
-      { label: "Spec — Function types and declarations", url: "https://go.dev/ref/spec#Function_declarations", kind: "docs" },
-      { label: "Effective Go — Functions", url: "https://go.dev/doc/effective_go#functions", kind: "docs" },
-      { label: "Codewalk: First-Class Functions in Go", url: "https://go.dev/doc/codewalk/functions/", kind: "docs" },
-      notion("Notion: Functions", "https://app.notion.com/p/Functions-1a2e9488b51a81f99b61d58a2b5e3457"),
-      { ...practiceRepo, label: "Learner's practice code — super30-Go/function/function.go", url: "https://github.com/saurabhraghuvanshii/language-learning/tree/main/Go/super30-Go/function" },
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -1850,14 +1760,7 @@ fmt.Println(a(), b())` },
     prerequisites: ["go/functions", "go/interfaces"],
     related: ["go/error-wrapping", "go/defer", "go/interface-internals-typed-nil", "javascript/error-handling"],
     tags: ["go", "errors", "panic", "recover", "wrapping"],
-    sources: [
-      { label: "Error handling and Go (Go blog)", url: "https://go.dev/blog/error-handling-and-go", kind: "docs" },
-      { label: "Working with Errors in Go 1.13 (Go blog)", url: "https://go.dev/blog/go1.13-errors", kind: "docs" },
-      { label: "Errors are values (Go blog)", url: "https://go.dev/blog/errors-are-values", kind: "docs" },
-      { label: "Defer, Panic, and Recover (Go blog)", url: "https://go.dev/blog/defer-panic-and-recover", kind: "docs" },
-      { label: "Package errors", url: "https://pkg.go.dev/errors", kind: "docs" },
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2082,15 +1985,7 @@ recovered: runtime error: integer divide by zero`,
     prerequisites: ["go/functions"],
     related: ["go/interfaces", "go/method-sets", "go/pointers", "go/json"],
     tags: ["go", "structs", "methods", "receivers", "embedding", "alignment"],
-    sources: [
-      { label: "Spec — Struct types", url: "https://go.dev/ref/spec#Struct_types", kind: "docs" },
-      { label: "Spec — Method declarations", url: "https://go.dev/ref/spec#Method_declarations", kind: "docs" },
-      { label: "Effective Go — Embedding", url: "https://go.dev/doc/effective_go#embedding", kind: "docs" },
-      { label: "Go FAQ — Should I define methods on values or pointers?", url: "https://go.dev/doc/faq#methods_on_values_or_pointers", kind: "docs" },
-      notion("Notion: Structs & attaching methods", "https://app.notion.com/p/Structs-attaching-methods-1a2e9488b51a8192b24cec4fa9bddc1a"),
-      { ...practiceRepo, label: "Learner's practice code — super30-Go/struct/struct.go", url: "https://github.com/saurabhraghuvanshii/language-learning/tree/main/Go/super30-Go/struct" },
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2330,13 +2225,7 @@ fmt.Println(c.n)` },
     prerequisites: ["go/structs-methods"],
     related: ["go/interface-internals-typed-nil", "go/method-sets", "go/errors", "typescript/types-vs-interfaces"],
     tags: ["go", "interfaces", "polymorphism", "type-assertion", "type-switch", "any"],
-    sources: [
-      { label: "Spec — Interface types", url: "https://go.dev/ref/spec#Interface_types", kind: "docs" },
-      { label: "Effective Go — Interfaces", url: "https://go.dev/doc/effective_go#interfaces", kind: "docs" },
-      { label: "The Laws of Reflection (Go blog)", url: "https://go.dev/blog/laws-of-reflection", kind: "docs" },
-      notion("Notion: Interfaces", "https://app.notion.com/p/Interfaces-1a2e9488b51a81948fc9ef52d1ed130f"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2551,13 +2440,7 @@ int 42 | shape with area 10.0 | other string | nil`,
     prerequisites: ["go/variables-constants", "go/structs-methods"],
     related: ["typescript/enums", "go/json", "go/interfaces"],
     tags: ["go", "enums", "iota", "constants", "stringer"],
-    sources: [
-      { label: "Spec — Iota", url: "https://go.dev/ref/spec#Iota", kind: "docs" },
-      { label: "Effective Go — Constants", url: "https://go.dev/doc/effective_go#constants", kind: "docs" },
-      { label: "stringer command", url: "https://pkg.go.dev/golang.org/x/tools/cmd/stringer", kind: "docs" },
-      notion("Notion: Enums", "https://app.notion.com/p/Enums-1a2e9488b51a8129b4ebea046e6e94ae"),
-      { ...practiceRepo, label: "Learner's practice code — super30-Go/enum/enum.go", url: "https://github.com/saurabhraghuvanshii/language-learning/tree/main/Go/super30-Go/enum" },
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2758,14 +2641,7 @@ func main() {
     prerequisites: ["go/structs-methods", "go/maps"],
     related: ["go/http-server", "go/http-client", "go/enums-iota", "backend/serialization"],
     tags: ["go", "json", "struct-tags", "reflection", "encoding"],
-    sources: [
-      { label: "Package encoding/json", url: "https://pkg.go.dev/encoding/json", kind: "docs" },
-      { label: "JSON and Go (Go blog)", url: "https://go.dev/blog/json", kind: "docs" },
-      { label: "Go 1.24 release notes (omitzero)", url: "https://go.dev/doc/go1.24", kind: "docs" },
-      { label: "A new experimental Go API for JSON (Go blog)", url: "https://go.dev/blog/jsonv2-exp", kind: "docs" },
-      notion("Notion: JSON", "https://app.notion.com/p/JSON-1a2e9488b51a81c6a3b8c2d4abeddd2b"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2945,14 +2821,7 @@ json: unknown field "nmae"`,
     prerequisites: ["go/interfaces", "go/json"],
     related: ["go/http-client", "go/graceful-shutdown", "go/context", "go/gin", "networks/http", "system-design/rest-api-design"],
     tags: ["go", "http", "net/http", "servemux", "middleware", "timeouts"],
-    sources: [
-      { label: "Package net/http", url: "https://pkg.go.dev/net/http", kind: "docs" },
-      { label: "Routing Enhancements for Go 1.22 (Go blog)", url: "https://go.dev/blog/routing-enhancements", kind: "docs" },
-      { label: "Package net/http/httptest", url: "https://pkg.go.dev/net/http/httptest", kind: "docs" },
-      { label: "Tutorial: Writing Web Applications", url: "https://go.dev/doc/articles/wiki/", kind: "docs" },
-      notion("Notion: HTTP Module", "https://app.notion.com/p/HTTP-Module-1a2e9488b51a8144a4fcf560c39ba9c5"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3195,12 +3064,7 @@ func main() {
     prerequisites: ["go/http-server", "go/json"],
     related: ["go/context", "go/concurrent-requests", "go/goroutine-leaks", "system-design/circuit-breakers-timeouts-retries"],
     tags: ["go", "http", "client", "timeouts", "connection-pooling"],
-    sources: [
-      { label: "Package net/http — Client and Transport", url: "https://pkg.go.dev/net/http#Client", kind: "docs" },
-      { label: "Package context", url: "https://pkg.go.dev/context", kind: "docs" },
-      notion("Notion: HTTP Client", "https://app.notion.com/p/HTTP-Client-1a2e9488b51a81c5b200e2edf793147d"),
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3374,14 +3238,7 @@ func main() {
     prerequisites: ["go/packages-modules"],
     related: ["go/tooling-gofmt", "go/gin", "production/pnpm-internals"],
     tags: ["go", "modules", "dependencies", "go.sum", "mvs", "semver"],
-    sources: [
-      { label: "Go Modules Reference", url: "https://go.dev/ref/mod", kind: "docs" },
-      { label: "Tutorial: Create a Go module", url: "https://go.dev/doc/tutorial/create-module", kind: "docs" },
-      { label: "Managing dependencies", url: "https://go.dev/doc/modules/managing-dependencies", kind: "docs" },
-      { label: "Module proxy and checksum database", url: "https://proxy.golang.org/", kind: "docs" },
-      notion("Notion: External modules", "https://app.notion.com/p/External-modules-1a2e9488b51a81359b1df7ddd90e7f06"),
-      notion("Notion: Modules in Go", "https://app.notion.com/p/Modules-in-go-1a2e9488b51a814088f9c7d72140de4f"),
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3483,13 +3340,7 @@ func main() {
     prerequisites: ["go/functions", "go/structs-methods"],
     related: ["go/stack-vs-heap", "go/escape-analysis", "go/method-sets", "javascript/data-types"],
     tags: ["go", "pointers", "memory", "nil"],
-    sources: [
-      { label: "Spec — Pointer types", url: "https://go.dev/ref/spec#Pointer_types", kind: "docs" },
-      { label: "Spec — Address operators", url: "https://go.dev/ref/spec#Address_operators", kind: "docs" },
-      { label: "Go FAQ — When are function parameters passed by value?", url: "https://go.dev/doc/faq#pass_by_value", kind: "docs" },
-      tour,
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3669,14 +3520,7 @@ fmt.Println(x)` },
     prerequisites: ["go/pointers"],
     related: ["go/escape-analysis", "go/garbage-collection", "go/goroutine-stacks", "os/stack-vs-heap", "os/cpu-memory-hierarchy"],
     tags: ["go", "memory", "stack", "heap", "allocation", "runtime"],
-    sources: [
-      { label: "Go FAQ — How do I know whether a variable is allocated on the heap or the stack?", url: "https://go.dev/doc/faq#stack_or_heap", kind: "docs" },
-      { label: "A Guide to the Go Garbage Collector", url: "https://go.dev/doc/gc-guide", kind: "docs" },
-      { label: "Go 1.4 release notes (contiguous stacks)", url: "https://go.dev/doc/go1.4", kind: "docs" },
-      { label: "Go 1.19 release notes (initial stack size)", url: "https://go.dev/doc/go1.19", kind: "docs" },
-      { label: "runtime/malloc.go (allocator overview comment)", url: "https://github.com/golang/go/blob/master/src/runtime/malloc.go", kind: "docs" },
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3883,12 +3727,7 @@ func main() {
     prerequisites: ["go/stack-vs-heap", "go/interfaces"],
     related: ["go/garbage-collection", "go/profiling-pprof", "go/benchmarking-testing", "go/interface-internals-typed-nil"],
     tags: ["go", "escape-analysis", "compiler", "allocation", "performance"],
-    sources: [
-      { label: "Go FAQ — stack or heap", url: "https://go.dev/doc/faq#stack_or_heap", kind: "docs" },
-      { label: "cmd/compile/internal/escape (source and design comment)", url: "https://github.com/golang/go/tree/master/src/cmd/compile/internal/escape", kind: "docs" },
-      { label: "A Guide to the Go Garbage Collector — Eliminating heap allocations", url: "https://go.dev/doc/gc-guide#Eliminating_heap_allocations", kind: "docs" },
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -4101,16 +3940,7 @@ esc/main.go:29:7: 4 escapes to heap`,
     prerequisites: ["go/stack-vs-heap", "go/escape-analysis"],
     related: ["go/profiling-pprof", "javascript/memory-leaks-gc", "go/goroutine-leaks", "nodejs/v8-internals"],
     tags: ["go", "gc", "garbage-collection", "tri-color", "gogc", "gomemlimit", "runtime"],
-    sources: [
-      { label: "A Guide to the Go Garbage Collector", url: "https://go.dev/doc/gc-guide", kind: "docs" },
-      { label: "Getting to Go: The Journey of Go's Garbage Collector (Go blog)", url: "https://go.dev/blog/ismmkeynote", kind: "docs" },
-      { label: "Go GC: Prioritizing low latency and simplicity (Go blog, Go 1.5)", url: "https://go.dev/blog/go15gc", kind: "docs" },
-      { label: "Proposal: Eliminate STW stack re-scanning (hybrid write barrier)", url: "https://github.com/golang/proposal/blob/master/design/17503-eliminate-rescan.md", kind: "docs" },
-      { label: "Proposal: Soft memory limit (GOMEMLIMIT)", url: "https://github.com/golang/proposal/blob/master/design/48409-soft-memory-limit.md", kind: "docs" },
-      { label: "The Green Tea Garbage Collector (Go blog)", url: "https://go.dev/blog/greenteagc", kind: "docs" },
-      { label: "Package runtime/debug", url: "https://pkg.go.dev/runtime/debug", kind: "docs" },
-      pgl,
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -4362,13 +4192,7 @@ func main() {
     prerequisites: ["go/interfaces", "go/pointers", "go/errors"],
     related: ["go/method-sets", "go/escape-analysis", "go/error-wrapping"],
     tags: ["go", "interfaces", "itab", "nil", "runtime", "gotcha"],
-    sources: [
-      { label: "Go FAQ — Why is my nil error value not equal to nil?", url: "https://go.dev/doc/faq#nil_error", kind: "docs" },
-      { label: "Spec — Interface types / Comparison operators", url: "https://go.dev/ref/spec#Comparison_operators", kind: "docs" },
-      { label: "Go Data Structures: Interfaces (Russ Cox)", url: "https://research.swtch.com/interfaces", kind: "external" },
-      { label: "The Laws of Reflection (Go blog)", url: "https://go.dev/blog/laws-of-reflection", kind: "docs" },
-      { label: "runtime/iface.go and runtime/runtime2.go", url: "https://github.com/golang/go/blob/master/src/runtime/iface.go", kind: "docs" },
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -4615,12 +4439,7 @@ fmt.Println(w == nil)` },
     prerequisites: ["go/structs-methods", "go/interfaces", "go/pointers"],
     related: ["go/interface-internals-typed-nil", "go/maps"],
     tags: ["go", "method-sets", "receivers", "interfaces", "addressability", "embedding"],
-    sources: [
-      { label: "Spec — Method sets", url: "https://go.dev/ref/spec#Method_sets", kind: "docs" },
-      { label: "Spec — Calls (addressability shorthand)", url: "https://go.dev/ref/spec#Calls", kind: "docs" },
-      { label: "Spec — Struct types (promoted methods)", url: "https://go.dev/ref/spec#Struct_types", kind: "docs" },
-      { label: "Go FAQ — Why do T and *T have different method sets?", url: "https://go.dev/doc/faq#different_method_sets", kind: "docs" },
-    ],
+    sources: [],
     sections: [
       {
         id: "objectives",

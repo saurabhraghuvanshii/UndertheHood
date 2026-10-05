@@ -1,84 +1,10 @@
-import type { Lesson, SourceRef } from "../types";
+import type { Lesson } from "../types";
 
 /**
  * Go track — "Concurrency" and "Production Go" modules.
  * Structure lives in `go.ts`; fundamentals/runtime lessons live in `go-fundamentals.ts`.
  */
 
-const notion = (label: string, url: string): SourceRef => ({
-  label: `Notion: ${label}`,
-  url,
-  kind: "inaccessible",
-  note: "Private Notion page — not readable, nothing imported.",
-});
-
-const N = {
-  cvp: notion("Concurrency vs parallelism vs interleaving", "https://app.notion.com/p/Concurrency-vs-parallelism-vs-interleaving-1a2e9488b51a81238232c26abe6489a8"),
-  goroutines: notion("Goroutines", "https://app.notion.com/p/Goroutines-1a2e9488b51a816da0b5d42463eeff5f"),
-  channels: notion("Channels — buffered vs unbuffered, defers", "https://app.notion.com/p/Channels-Buffered-vs-Unbuffered-defers-1a2e9488b51a81baa5f6f8568198f14b"),
-  chanSync: notion("Channel synchronization & WaitGroups", "https://app.notion.com/p/Channel-synchronization-waitgroups-1a2e9488b51a816a8000cab1310a0e90"),
-  mutex: notion("Mutex", "https://app.notion.com/p/Mutex-1a2e9488b51a81e2a5b9dc69eadc3ed4"),
-  select: notion("Select", "https://app.notion.com/p/Select-1a2e9488b51a8180bef1cb10aabbbea8"),
-  requests: notion("Concurrent requests", "https://app.notion.com/p/Concurrent-requests-1a2e9488b51a81d9b1e6d999b89d0015"),
-  context: notion("Context", "https://app.notion.com/p/Context-1a2e9488b51a8102aa07d68282079f75"),
-  patterns: notion("Concurrency patterns", "https://app.notion.com/p/Concurrency-patterns-1a2e9488b51a8125acecc5904e7bd9e6"),
-  range: notion("Range", "https://app.notion.com/p/Range-1a2e9488b51a81a59e06d83bcc5e3869"),
-  close: notion("Close", "https://app.notion.com/p/Close-1a2e9488b51a81fcbc2adf2ff2b20779"),
-  workerPool: notion("Worker pool pattern", "https://app.notion.com/p/Worker-pool-pattern-1a2e9488b51a8130a3f6c09175ea85d3"),
-  puzzles: notion("Puzzles", "https://app.notion.com/p/Puzzles-1a2e9488b51a811895d7f8e0c360e078"),
-  gin: notion("Gin framework", "https://app.notion.com/p/Gin-framework-1a2e9488b51a81ab982ae161c27a0e8c"),
-  forkJoin: notion("Fork-Join model", "https://app.notion.com/p/Fork-Join-model-1a2e9488b51a81c1a189efb5d525af60"),
-  raceDeadlock: notion("Race conditions, deadlocks and livelocks", "https://app.notion.com/p/Race-conditions-deadlocks-and-livelocks-1a2e9488b51a81df955ec8b03cc89c13"),
-};
-
-const S = {
-  practice: {
-    label: "Learner's Go practice code (language-learning/Go)",
-    url: "https://github.com/saurabhraghuvanshii/language-learning/tree/main/Go",
-    kind: "original-note",
-    note: "Examples in this lesson adapt the learner's own practice programs (routines, concurrency, super30-Go/channel).",
-  } as SourceRef,
-  pgl: {
-    label: "Practical Go Lessons (book)",
-    url: "https://www.practical-go-lessons.com/",
-    kind: "external",
-    note: "Recommended companion reading; its contents are not reproduced here.",
-  } as SourceRef,
-  memModel: { label: "The Go Memory Model", url: "https://go.dev/ref/mem", kind: "docs" } as SourceRef,
-  spec: { label: "The Go Programming Language Specification", url: "https://go.dev/ref/spec", kind: "docs" } as SourceRef,
-  effective: { label: "Effective Go — Concurrency", url: "https://go.dev/doc/effective_go#concurrency", kind: "docs" } as SourceRef,
-  pipelines: { label: "Go blog: Pipelines and cancellation", url: "https://go.dev/blog/pipelines", kind: "docs" } as SourceRef,
-  contextBlog: { label: "Go blog: Context", url: "https://go.dev/blog/context", kind: "docs" } as SourceRef,
-  contextPkg: { label: "Package context", url: "https://pkg.go.dev/context", kind: "docs" } as SourceRef,
-  sync: { label: "Package sync", url: "https://pkg.go.dev/sync", kind: "docs" } as SourceRef,
-  atomic: { label: "Package sync/atomic", url: "https://pkg.go.dev/sync/atomic", kind: "docs" } as SourceRef,
-  race: { label: "Data Race Detector", url: "https://go.dev/doc/articles/race_detector", kind: "docs" } as SourceRef,
-  pprof: { label: "Package net/http/pprof", url: "https://pkg.go.dev/net/http/pprof", kind: "docs" } as SourceRef,
-  diagnostics: { label: "Go diagnostics", url: "https://go.dev/doc/diagnostics", kind: "docs" } as SourceRef,
-  runtime: { label: "Package runtime", url: "https://pkg.go.dev/runtime", kind: "docs" } as SourceRef,
-  schedSrc: {
-    label: "Go runtime source: runtime/proc.go (scheduler)",
-    url: "https://github.com/golang/go/blob/master/src/runtime/proc.go",
-    kind: "external",
-    note: "Implementation, not specification — details change between releases.",
-  } as SourceRef,
-  chanSrc: {
-    label: "Go runtime source: runtime/chan.go",
-    url: "https://github.com/golang/go/blob/master/src/runtime/chan.go",
-    kind: "external",
-    note: "Implementation, not specification.",
-  } as SourceRef,
-  concurrencyTalk: { label: "Rob Pike — Concurrency is not Parallelism (Go blog)", url: "https://go.dev/blog/waza-talk", kind: "docs" } as SourceRef,
-  errorsBlog: { label: "Go blog: Working with Errors in Go 1.13", url: "https://go.dev/blog/go1.13-errors", kind: "docs" } as SourceRef,
-  errorsPkg: { label: "Package errors", url: "https://pkg.go.dev/errors", kind: "docs" } as SourceRef,
-  slog: { label: "Package log/slog", url: "https://pkg.go.dev/log/slog", kind: "docs" } as SourceRef,
-  slogBlog: { label: "Go blog: Structured Logging with slog", url: "https://go.dev/blog/slog", kind: "docs" } as SourceRef,
-  testing: { label: "Package testing", url: "https://pkg.go.dev/testing", kind: "docs" } as SourceRef,
-  httpPkg: { label: "Package net/http (Server.Shutdown)", url: "https://pkg.go.dev/net/http#Server.Shutdown", kind: "docs" } as SourceRef,
-  signal: { label: "Package os/signal (NotifyContext)", url: "https://pkg.go.dev/os/signal#NotifyContext", kind: "docs" } as SourceRef,
-  gin: { label: "Gin documentation", url: "https://gin-gonic.com/docs/", kind: "external" } as SourceRef,
-  errgroup: { label: "golang.org/x/sync/errgroup", url: "https://pkg.go.dev/golang.org/x/sync/errgroup", kind: "docs" } as SourceRef,
-};
 
 export const lessons: Lesson[] = [
   // ───────────────────────────────────────────────────────── concurrency-vs-parallelism
@@ -96,7 +22,7 @@ export const lessons: Lesson[] = [
     prerequisites: ["go/functions", "os/processes-threads"],
     related: ["go/goroutines", "go/gmp-scheduler", "system-design/multithreading-parallelism"],
     tags: ["concurrency", "parallelism", "interleaving", "GOMAXPROCS"],
-    sources: [S.concurrencyTalk, S.effective, S.runtime, S.practice, S.pgl, N.cvp],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -370,7 +296,7 @@ GOMAXPROCS: 8`,
     prerequisites: ["go/concurrency-vs-parallelism", "go/functions"],
     related: ["go/gmp-scheduler", "go/goroutine-stacks", "go/waitgroup", "go/goroutine-leaks", "os/processes-threads"],
     tags: ["goroutine", "go statement", "runtime", "loop variable", "Go 1.22"],
-    sources: [S.spec, S.effective, S.runtime, S.practice, S.pgl, N.goroutines],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -708,7 +634,7 @@ wg.Wait()` },
     prerequisites: ["go/goroutines", "os/scheduling", "os/processes-threads"],
     related: ["go/goroutine-stacks", "go/concurrency-vs-parallelism", "go/profiling-pprof"],
     tags: ["scheduler", "GMP", "work stealing", "netpoller", "preemption", "sysmon"],
-    sources: [S.runtime, S.schedSrc, S.diagnostics, S.pgl],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -993,7 +919,7 @@ SCHED 1007ms: gomaxprocs=4 idleprocs=0 threads=5 spinningthreads=0 needspinning=
     prerequisites: ["go/goroutines", "go/stack-vs-heap"],
     related: ["go/gmp-scheduler", "go/escape-analysis", "go/garbage-collection"],
     tags: ["stack", "stack growth", "contiguous stacks", "morestack"],
-    sources: [S.runtime, S.schedSrc, { label: "Go 1.4 release notes (stack size)", url: "https://go.dev/doc/go1.4", kind: "docs" }, { label: "Go 1.19 release notes (initial stack sizing)", url: "https://go.dev/doc/go1.19", kind: "docs" }],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -1184,7 +1110,7 @@ fatal error: stack overflow`,
     prerequisites: ["go/goroutines"],
     related: ["go/channel-close-range", "go/select", "go/mutex", "go/worker-pool", "go/race-deadlock-livelock"],
     tags: ["channel", "unbuffered", "buffered", "hchan", "sudog", "happens-before", "deadlock"],
-    sources: [S.spec, S.memModel, S.effective, S.chanSrc, S.practice, S.pgl, N.channels, N.chanSync],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -1358,7 +1284,7 @@ func main() {
           },
           {
             type: "p",
-            text: "**Memory model guarantees** (go.dev/ref/mem): a send happens-before the corresponding receive completes; for unbuffered channels the receive happens-before the send completes; closing happens-before a receive that returns because the channel is closed; and the k-th receive on a channel with capacity C happens-before the (k+C)-th send completes — which is why a buffered channel works as a counting semaphore.",
+            text: "**Memory model guarantees**: a send happens-before the corresponding receive completes; for unbuffered channels the receive happens-before the send completes; closing happens-before a receive that returns because the channel is closed; and the k-th receive on a channel with capacity C happens-before the (k+C)-th send completes — which is why a buffered channel works as a counting semaphore.",
           },
         ],
       },
@@ -1557,7 +1483,7 @@ fmt.Println(<-ch)` },
     prerequisites: ["go/channels"],
     related: ["go/select", "go/worker-pool", "go/waitgroup", "go/goroutine-leaks"],
     tags: ["close", "range", "comma-ok", "pipeline", "ownership"],
-    sources: [S.spec, S.pipelines, S.memModel, S.pgl, N.close, N.range],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -1636,7 +1562,7 @@ got 2
       },
       {
         id: "walkthrough",
-        title: "Walkthrough: a pipeline (after go.dev/blog/pipelines)",
+        title: "Walkthrough: a pipeline",
         blocks: [
           {
             type: "code",
@@ -1819,7 +1745,7 @@ fmt.Printf("%q %v %q %v\\n", v1, ok1, v2, ok2)` },
     prerequisites: ["go/channels", "go/channel-close-range"],
     related: ["go/context", "go/goroutine-leaks", "go/backpressure-bounded-concurrency"],
     tags: ["select", "timeout", "default", "nil channel", "for-select"],
-    sources: [S.spec, S.pipelines, S.chanSrc, S.pgl, N.select],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2206,7 +2132,7 @@ case v := <-b: fmt.Println("b", v)
     prerequisites: ["go/functions", "go/errors"],
     related: ["go/mutex", "go/waitgroup", "go/error-wrapping", "go/goroutines"],
     tags: ["defer", "panic", "recover", "LIFO", "named results", "open-coded defers"],
-    sources: [S.spec, { label: "Go blog: Defer, Panic, and Recover", url: "https://go.dev/blog/defer-panic-and-recover", kind: "docs" }, S.effective, S.pgl, N.channels],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2454,7 +2380,7 @@ go func() {
     prerequisites: ["go/goroutines", "go/defer"],
     related: ["go/fork-join", "go/worker-pool", "go/channel-close-range", "go/mutex"],
     tags: ["WaitGroup", "sync", "Add", "Done", "Wait", "wg.Go", "Go 1.25"],
-    sources: [S.sync, S.memModel, S.practice, S.pgl, N.chanSync],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -2735,7 +2661,7 @@ wg.Wait()` },
     prerequisites: ["go/goroutines", "go/waitgroup", "go/defer"],
     related: ["go/atomics", "go/race-deadlock-livelock", "go/race-detector", "go/channels", "os/synchronization"],
     tags: ["mutex", "RWMutex", "critical section", "starvation", "reentrancy", "TryLock"],
-    sources: [S.sync, S.memModel, { label: "Go source: sync/mutex.go (starvation mode comment)", url: "https://github.com/golang/go/blob/master/src/internal/sync/mutex.go", kind: "external", note: "Implementation, not spec." }, S.practice, S.pgl, N.mutex],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3083,7 +3009,7 @@ goroutine 1 [sync.Mutex.Lock]:
     prerequisites: ["go/mutex"],
     related: ["go/sync-once", "go/race-detector", "go/race-deadlock-livelock", "os/cpu-memory-hierarchy"],
     tags: ["atomic", "CAS", "memory model", "happens-before", "sequential consistency"],
-    sources: [S.memModel, S.atomic, { label: "Russ Cox — Memory Models (series)", url: "https://research.swtch.com/mm", kind: "external" }, S.pgl],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3372,7 +3298,7 @@ func main() {
     prerequisites: ["go/mutex", "go/atomics"],
     related: ["go/atomics", "go/channel-close-range"],
     tags: ["sync.Once", "lazy init", "singleton", "OnceValue", "double-checked locking"],
-    sources: [S.sync, S.memModel, S.pgl],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3595,7 +3521,7 @@ Once is done even though f panicked`,
     prerequisites: ["go/channels", "go/channel-close-range", "go/waitgroup"],
     related: ["go/fork-join", "go/backpressure-bounded-concurrency", "go/concurrent-requests", "go/context", "go/graceful-shutdown"],
     tags: ["worker pool", "fan-out", "fan-in", "jobs channel", "bounded concurrency"],
-    sources: [S.pipelines, { label: "Go by Example: Worker Pools", url: "https://gobyexample.com/worker-pools", kind: "external" }, S.errgroup, S.practice, S.pgl, N.workerPool, N.patterns],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -3867,7 +3793,7 @@ func main() {
     prerequisites: ["go/waitgroup", "go/goroutines"],
     related: ["go/worker-pool", "go/concurrent-requests", "go/atomics"],
     tags: ["fork-join", "divide and conquer", "parallel sum", "merge sort", "false sharing"],
-    sources: [S.sync, S.errgroup, S.pgl, N.forkJoin, N.patterns],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -4142,7 +4068,7 @@ func main() {
     prerequisites: ["go/goroutines", "go/waitgroup", "go/http-client", "go/context"],
     related: ["go/worker-pool", "go/backpressure-bounded-concurrency", "go/goroutine-leaks", "go/fork-join"],
     tags: ["http", "fan-out", "semaphore", "timeout", "httptest", "connection pooling"],
-    sources: [{ label: "Package net/http (Client)", url: "https://pkg.go.dev/net/http#Client", kind: "docs" }, S.contextPkg, S.errgroup, S.pgl, N.requests],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -4371,7 +4297,7 @@ faster than sequential (500ms): true`,
     prerequisites: ["go/select", "go/channel-close-range"],
     related: ["go/goroutine-leaks", "go/graceful-shutdown", "go/concurrent-requests", "go/worker-pool"],
     tags: ["context", "cancellation", "deadline", "timeout", "WithValue", "context tree"],
-    sources: [S.contextPkg, S.contextBlog, S.pipelines, S.pgl, N.context],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -4679,7 +4605,7 @@ upstream returned 503`,
     prerequisites: ["go/mutex", "go/channels"],
     related: ["go/race-detector", "go/atomics", "go/goroutine-leaks", "os/synchronization", "system-design/locks-transactions-isolation"],
     tags: ["race condition", "data race", "deadlock", "livelock", "starvation", "Coffman conditions", "lock ordering"],
-    sources: [S.memModel, S.race, S.sync, S.pgl, N.raceDeadlock],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -4984,7 +4910,7 @@ func polite(first, second *sync.Mutex) {
     prerequisites: ["go/channels", "go/select", "go/context"],
     related: ["go/profiling-pprof", "go/backpressure-bounded-concurrency", "go/concurrent-requests"],
     tags: ["goroutine leak", "NumGoroutine", "pprof goroutine", "goleak", "blocked forever"],
-    sources: [S.pipelines, S.pprof, { label: "uber-go/goleak", url: "https://github.com/uber-go/goleak", kind: "external" }, S.pgl],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -5171,7 +5097,7 @@ func main() {
     prerequisites: ["go/worker-pool", "go/select"],
     related: ["system-design/backpressure", "system-design/rate-limiting", "go/concurrent-requests", "go/goroutine-leaks"],
     tags: ["backpressure", "semaphore", "bounded queue", "load shedding", "errgroup SetLimit"],
-    sources: [S.pipelines, S.errgroup, { label: "golang.org/x/sync/semaphore", url: "https://pkg.go.dev/golang.org/x/sync/semaphore", kind: "docs" }, S.pgl, N.patterns],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -5397,7 +5323,7 @@ func (q *Queue) TrySubmit(j Job) error {
     prerequisites: ["go/channels", "go/channel-close-range", "go/select", "go/defer", "go/waitgroup", "go/mutex"],
     related: ["go/race-deadlock-livelock", "go/goroutine-leaks", "go/sync-once"],
     tags: ["puzzles", "output prediction", "bug spotting", "interview practice"],
-    sources: [S.spec, S.memModel, S.pgl, N.puzzles],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -5746,7 +5672,7 @@ fmt.Println("locked twice")` },
     prerequisites: ["go/context", "go/http-server", "go/waitgroup"],
     related: ["go/worker-pool", "cloud/kubernetes", "system-design/health-checks-heartbeats", "system-design/deployment-strategies"],
     tags: ["graceful shutdown", "SIGTERM", "signal.NotifyContext", "http.Server.Shutdown", "Kubernetes"],
-    sources: [S.signal, S.httpPkg, S.contextPkg, { label: "Kubernetes: Pod termination", url: "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination", kind: "docs" }, S.pgl],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -5951,7 +5877,7 @@ func main() {
     prerequisites: ["go/errors", "go/interfaces"],
     related: ["go/defer", "go/structured-logging", "go/interface-internals-typed-nil"],
     tags: ["errors", "wrapping", "%w", "errors.Is", "errors.As", "errors.Join", "sentinel errors"],
-    sources: [S.errorsBlog, S.errorsPkg, S.pgl],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -6151,7 +6077,7 @@ false`,
     prerequisites: ["go/mutex", "go/atomics"],
     related: ["go/race-deadlock-livelock", "go/benchmarking-testing"],
     tags: ["race detector", "ThreadSanitizer", "-race", "CI", "happens-before"],
-    sources: [S.race, S.memModel, S.pgl],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -6306,7 +6232,7 @@ Goroutine 11 (finished) created at:
     prerequisites: ["go/goroutines", "go/garbage-collection"],
     related: ["go/benchmarking-testing", "go/goroutine-leaks", "go/escape-analysis", "go/gmp-scheduler"],
     tags: ["pprof", "CPU profile", "heap profile", "goroutine profile", "flame graph", "PGO"],
-    sources: [S.pprof, S.diagnostics, { label: "Go blog: Profiling Go Programs", url: "https://go.dev/blog/pprof", kind: "docs" }, { label: "Profile-guided optimization", url: "https://go.dev/doc/pgo", kind: "docs" }],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -6490,7 +6416,7 @@ go test -bench . -cpuprofile cpu.out -memprofile mem.out && go tool pprof cpu.ou
     prerequisites: ["go/functions", "go/slices-internals"],
     related: ["go/race-detector", "go/profiling-pprof", "go/escape-analysis"],
     tags: ["testing", "table-driven tests", "t.Parallel", "benchmark", "-benchmem", "b.Loop", "fuzzing"],
-    sources: [S.testing, { label: "Add a test (Go tutorial)", url: "https://go.dev/doc/tutorial/add-a-test", kind: "docs" }, { label: "benchstat", url: "https://pkg.go.dev/golang.org/x/perf/cmd/benchstat", kind: "docs" }, { label: "Go fuzzing", url: "https://go.dev/doc/security/fuzz/", kind: "docs" }],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -6706,7 +6632,7 @@ PASS`,
     prerequisites: ["go/interfaces", "go/context"],
     related: ["system-design/logging-monitoring-tracing", "production/observability-opentelemetry", "go/error-wrapping"],
     tags: ["slog", "structured logging", "JSON logs", "log levels", "redaction"],
-    sources: [S.slog, S.slogBlog],
+    sources: [],
     sections: [
       {
         id: "objectives",
@@ -6867,7 +6793,7 @@ level=ERROR msg="payment failed" order=1234 err="card declined"`,
     prerequisites: ["go/http-server", "go/json", "go/external-modules"],
     related: ["go/context", "go/graceful-shutdown", "go/structured-logging", "backend/rest-graphql-grpc-trpc"],
     tags: ["gin", "router", "middleware", "binding", "validation", "REST"],
-    sources: [S.gin, { label: "gin-gonic/gin on GitHub", url: "https://github.com/gin-gonic/gin", kind: "external" }, { label: "Go 1.22 routing enhancements", url: "https://go.dev/blog/routing-enhancements", kind: "docs" }, N.gin],
+    sources: [],
     sections: [
       {
         id: "objectives",

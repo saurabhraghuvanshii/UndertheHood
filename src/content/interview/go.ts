@@ -1,31 +1,9 @@
-import type { InterviewQuestion, SourceRef } from "../types";
+import type { InterviewQuestion } from "../types";
 
 /**
  * Go interview bank, ordered roughly by how often each topic is asked.
  * Examples were run on Go 1.26 unless marked otherwise.
  */
-
-const D = {
-  spec: { label: "The Go Programming Language Specification", url: "https://go.dev/ref/spec", kind: "docs" } as SourceRef,
-  mem: { label: "The Go Memory Model", url: "https://go.dev/ref/mem", kind: "docs" } as SourceRef,
-  effective: { label: "Effective Go", url: "https://go.dev/doc/effective_go", kind: "docs" } as SourceRef,
-  sync: { label: "Package sync", url: "https://pkg.go.dev/sync", kind: "docs" } as SourceRef,
-  runtime: { label: "Package runtime", url: "https://pkg.go.dev/runtime", kind: "docs" } as SourceRef,
-  context: { label: "Package context", url: "https://pkg.go.dev/context", kind: "docs" } as SourceRef,
-  contextBlog: { label: "Go blog: Context", url: "https://go.dev/blog/context", kind: "docs" } as SourceRef,
-  pipelines: { label: "Go blog: Pipelines and cancellation", url: "https://go.dev/blog/pipelines", kind: "docs" } as SourceRef,
-  race: { label: "Data Race Detector", url: "https://go.dev/doc/articles/race_detector", kind: "docs" } as SourceRef,
-  gc: { label: "A Guide to the Go Garbage Collector", url: "https://go.dev/doc/gc-guide", kind: "docs" } as SourceRef,
-  slices: { label: "Go blog: Go Slices — usage and internals", url: "https://go.dev/blog/slices-intro", kind: "docs" } as SourceRef,
-  maps: { label: "Go blog: Go maps in action", url: "https://go.dev/blog/maps", kind: "docs" } as SourceRef,
-  errorsBlog: { label: "Go blog: Working with Errors in Go 1.13", url: "https://go.dev/blog/go1.13-errors", kind: "docs" } as SourceRef,
-  deferBlog: { label: "Go blog: Defer, Panic, and Recover", url: "https://go.dev/blog/defer-panic-and-recover", kind: "docs" } as SourceRef,
-  loopvar: { label: "Go blog: Fixing For Loops in Go 1.22", url: "https://go.dev/blog/loopvar-preview", kind: "docs" } as SourceRef,
-  faqNil: { label: "Go FAQ: Why is my nil error value not equal to nil?", url: "https://go.dev/doc/faq#nil_error", kind: "docs" } as SourceRef,
-  faqHeap: { label: "Go FAQ: How do I know whether a variable is allocated on the heap or the stack?", url: "https://go.dev/doc/faq#stack_or_heap", kind: "docs" } as SourceRef,
-  http: { label: "Package net/http (Server.Shutdown)", url: "https://pkg.go.dev/net/http#Server.Shutdown", kind: "docs" } as SourceRef,
-  schedSrc: { label: "Go runtime source: runtime/proc.go", url: "https://github.com/golang/go/blob/master/src/runtime/proc.go", kind: "external", note: "Implementation, not specification." } as SourceRef,
-};
 
 export const questions: InterviewQuestion[] = [
   // ───────────────────────────────────────────── go-01
@@ -107,7 +85,7 @@ after: 4`,
     ],
     relatedLessons: ["go/goroutines", "go/goroutine-stacks", "go/gmp-scheduler", "go/concurrency-vs-parallelism"],
     relatedQuestions: ["go-02", "go-10"],
-    sources: [D.spec, D.runtime, D.effective],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-02
@@ -192,7 +170,7 @@ func main() {
     ],
     relatedLessons: ["go/gmp-scheduler", "go/goroutines", "go/goroutine-stacks"],
     relatedQuestions: ["go-01"],
-    sources: [D.runtime, D.schedSrc],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-03
@@ -272,7 +250,7 @@ func main() {
     ],
     relatedLessons: ["go/channels", "go/channel-close-range", "go/select"],
     relatedQuestions: ["go-04", "go-05", "go-09"],
-    sources: [D.spec, D.mem],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-04
@@ -350,7 +328,7 @@ got 2
     ],
     relatedLessons: ["go/channel-close-range", "go/channels", "go/worker-pool"],
     relatedQuestions: ["go-03", "go-06", "go-22"],
-    sources: [D.spec, D.pipelines],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-05
@@ -425,7 +403,7 @@ func main() {
     ],
     relatedLessons: ["go/select", "go/context", "go/goroutine-leaks"],
     relatedQuestions: ["go-03", "go-10", "go-11"],
-    sources: [D.spec],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-06
@@ -505,7 +483,7 @@ goroutine 1 [sync.WaitGroup.Wait]:
     ],
     relatedLessons: ["go/waitgroup", "go/fork-join", "go/worker-pool"],
     relatedQuestions: ["go-22", "go-09"],
-    sources: [D.sync, D.mem],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-07
@@ -595,7 +573,7 @@ func main() {
     ],
     relatedLessons: ["go/mutex", "go/atomics", "go/channels"],
     relatedQuestions: ["go-08", "go-13"],
-    sources: [D.sync, D.mem],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-08
@@ -682,7 +660,7 @@ func main() {
     ],
     relatedLessons: ["go/race-detector", "go/race-deadlock-livelock", "go/atomics", "go/mutex"],
     relatedQuestions: ["go-07", "go-13"],
-    sources: [D.race, D.mem],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-09
@@ -757,7 +735,7 @@ goroutine 1 [chan receive]:
     ],
     relatedLessons: ["go/race-deadlock-livelock", "go/channels", "go/puzzles"],
     relatedQuestions: ["go-03", "go-04", "go-10"],
-    sources: [D.spec, D.runtime],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-10
@@ -830,7 +808,7 @@ func main() {
     ],
     relatedLessons: ["go/goroutine-leaks", "go/context", "go/select", "go/profiling-pprof"],
     relatedQuestions: ["go-05", "go-11", "go-09"],
-    sources: [D.pipelines, { label: "Package net/http/pprof", url: "https://pkg.go.dev/net/http/pprof", kind: "docs" }],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-11
@@ -917,7 +895,7 @@ parent: context canceled`,
     ],
     relatedLessons: ["go/context", "go/graceful-shutdown", "go/concurrent-requests"],
     relatedQuestions: ["go-10", "go-23"],
-    sources: [D.context, D.contextBlog],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-12
@@ -991,7 +969,7 @@ func main() {
     ],
     relatedLessons: ["go/slices-internals", "go/arrays", "go/escape-analysis"],
     relatedQuestions: ["go-14", "go-17"],
-    sources: [D.slices, D.spec],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-13
@@ -1067,7 +1045,7 @@ func main() {
     ],
     relatedLessons: ["go/maps", "go/mutex", "go/race-detector"],
     relatedQuestions: ["go-07", "go-08", "go-14"],
-    sources: [D.maps, { label: "Go FAQ: Why are map operations not defined to be atomic?", url: "https://go.dev/doc/faq#atomic_maps", kind: "docs" }, D.sync],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-14
@@ -1142,7 +1120,7 @@ recovered: assignment to entry in nil map`,
     ],
     relatedLessons: ["go/maps", "go/json"],
     relatedQuestions: ["go-13", "go-12"],
-    sources: [D.maps, D.spec],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-15
@@ -1227,7 +1205,7 @@ true`,
     ],
     relatedLessons: ["go/interface-internals-typed-nil", "go/interfaces", "go/errors"],
     relatedQuestions: ["go-16", "go-21"],
-    sources: [D.faqNil, D.spec],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-16
@@ -1303,7 +1281,7 @@ func main() {
     ],
     relatedLessons: ["go/method-sets", "go/structs-methods", "go/interfaces", "go/mutex"],
     relatedQuestions: ["go-15", "go-07"],
-    sources: [D.spec, { label: "Go FAQ: Should I define methods on values or pointers?", url: "https://go.dev/doc/faq#methods_on_values_or_pointers", kind: "docs" }],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-17
@@ -1381,7 +1359,7 @@ func main() {
     ],
     relatedLessons: ["go/escape-analysis", "go/stack-vs-heap", "go/garbage-collection", "go/benchmarking-testing"],
     relatedQuestions: ["go-18", "go-12"],
-    sources: [D.faqHeap, D.gc],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-18
@@ -1449,7 +1427,7 @@ go tool pprof -sample_index=alloc_space http://localhost:6060/debug/pprof/allocs
     ],
     relatedLessons: ["go/garbage-collection", "go/escape-analysis", "go/profiling-pprof"],
     relatedQuestions: ["go-17"],
-    sources: [D.gc, D.runtime],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-19
@@ -1528,7 +1506,7 @@ defer 0`,
     ],
     relatedLessons: ["go/defer", "go/puzzles"],
     relatedQuestions: ["go-20", "go-24"],
-    sources: [D.spec, D.deferBlog],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-20
@@ -1615,7 +1593,7 @@ caught`,
     ],
     relatedLessons: ["go/defer", "go/errors", "go/goroutines"],
     relatedQuestions: ["go-19", "go-21"],
-    sources: [D.deferBlog, D.spec],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-21
@@ -1697,7 +1675,7 @@ false`,
     ],
     relatedLessons: ["go/error-wrapping", "go/errors"],
     relatedQuestions: ["go-15", "go-20"],
-    sources: [D.errorsBlog, { label: "Package errors", url: "https://pkg.go.dev/errors", kind: "docs" }],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-22
@@ -1791,7 +1769,7 @@ func main() {
     ],
     relatedLessons: ["go/worker-pool", "go/backpressure-bounded-concurrency", "go/channel-close-range", "go/graceful-shutdown"],
     relatedQuestions: ["go-04", "go-06", "go-23"],
-    sources: [D.pipelines, { label: "golang.org/x/sync/errgroup", url: "https://pkg.go.dev/golang.org/x/sync/errgroup", kind: "docs" }],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-23
@@ -1858,7 +1836,7 @@ if err := srv.Shutdown(shutdownCtx); err != nil {
     ],
     relatedLessons: ["go/graceful-shutdown", "go/context", "go/worker-pool"],
     relatedQuestions: ["go-11", "go-22"],
-    sources: [D.http, { label: "Package os/signal (NotifyContext)", url: "https://pkg.go.dev/os/signal#NotifyContext", kind: "docs" }],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-24
@@ -1927,7 +1905,7 @@ goroutine 0`,
     ],
     relatedLessons: ["go/goroutines", "go/control-flow", "go/puzzles"],
     relatedQuestions: ["go-01", "go-19"],
-    sources: [D.loopvar, { label: "Go 1.22 release notes", url: "https://go.dev/doc/go1.22", kind: "docs" }],
+    sources: [],
   },
 
   // ───────────────────────────────────────────── go-25
@@ -2004,6 +1982,6 @@ prod`,
     ],
     relatedLessons: ["go/sync-once", "go/atomics"],
     relatedQuestions: ["go-07"],
-    sources: [D.sync, D.mem],
+    sources: [],
   },
 ];
