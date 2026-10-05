@@ -1,0 +1,197 @@
+@import "tailwindcss";
+
+/* Theme is resolved to data-theme="light|dark" on <html> before first paint (see ThemeScript). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------- tokens */
+:root {
+  --bg: #faf9f6;
+  --surface: #ffffff;
+  --surface-2: #f3f1ec;
+  --surface-3: #ebe8e1;
+  --border: #e3e0d8;
+  --border-strong: #cdc8bd;
+  --fg: #1b1a17;
+  --fg-muted: #5c5850;
+  --fg-subtle: #858076;
+  --accent: #245a4e;
+  --accent-fg: #ffffff;
+  --accent-soft: #e3eeea;
+  --ok: #2d6a38;
+  --ok-soft: #e4f0e4;
+  --warn: #8a5a00;
+  --warn-soft: #f7edd6;
+  --danger: #a12d2d;
+  --danger-soft: #f6e3e1;
+  --info: #2f527f;
+  --info-soft: #e3eaf3;
+  --code-bg: #f4f2ed;
+  --focus: #245a4e;
+  --radius: 10px;
+  --radius-sm: 6px;
+  color-scheme: light;
+}
+
+[data-theme="dark"] {
+  --bg: #121211;
+  --surface: #181816;
+  --surface-2: #1f1f1c;
+  --surface-3: #282824;
+  --border: #2c2b27;
+  --border-strong: #3d3c37;
+  --fg: #ebe9e3;
+  --fg-muted: #a6a197;
+  --fg-subtle: #7d796f;
+  --accent: #86c2b2;
+  --accent-fg: #0f1a17;
+  --accent-soft: #1d2e29;
+  --ok: #8cc79a;
+  --ok-soft: #1c2a1f;
+  --warn: #e0b45f;
+  --warn-soft: #2e2615;
+  --danger: #e58f86;
+  --danger-soft: #331d1b;
+  --info: #93b4dd;
+  --info-soft: #1b2533;
+  --code-bg: #1a1a18;
+  --focus: #86c2b2;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-code: var(--code-bg);
+  --font-sans: var(--font-libre-franklin), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-md: var(--radius-sm);
+  --radius-lg: var(--radius);
+}
+
+/* ---------------------------------------------------------------- base */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings: "kern", "liga";
+  text-rendering: optimizeLegibility;
+}
+::selection {
+  background: var(--accent-soft);
+}
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+a {
+  text-underline-offset: 3px;
+}
+code,
+kbd,
+pre,
+.font-mono {
+  font-family: var(--font-mono);
+  /* no programming ligatures: learners must see the real characters (=> not ⇒) */
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+/* inline code inside prose */
+.prose-ink :not(pre) > code {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05em 0.35em;
+  font-size: 0.88em;
+  overflow-wrap: anywhere;
+}
+.prose-ink a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in oklab, var(--accent) 40%, transparent);
+}
+.prose-ink a:hover {
+  text-decoration-color: var(--accent);
+}
+
+/* ---------------------------------------------------------------- shiki */
+.shiki,
+.shiki span {
+  background-color: transparent !important;
+}
+[data-theme="dark"] .shiki,
+[data-theme="dark"] .shiki span {
+  color: var(--shiki-dark) !important;
+  font-style: var(--shiki-dark-font-style) !important;
+}
+pre.shiki {
+  counter-reset: line;
+}
+
+/* ---------------------------------------------------------------- motion */
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes pop {
+  0% { transform: scale(0.9); }
+  60% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+.anim-in {
+  animation: fade-in 220ms ease-out both;
+}
+.anim-pop {
+  animation: pop 320ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) *,
+  :root:not([data-motion="full"]) *::before,
+  :root:not([data-motion="full"]) *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+[data-motion="reduce"] *,
+[data-motion="reduce"] *::before,
+[data-motion="reduce"] *::after {
+  animation-duration: 1ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 1ms !important;
+  scroll-behavior: auto !important;
+}
+
+/* scrollbar calmness */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+/* fieldsets default to min-width: min-content, which breaks narrow layouts */
+fieldset {
+  min-width: 0;
+}
